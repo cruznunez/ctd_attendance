@@ -1,0 +1,9 @@
+<h2 class="card-title">Courses</h2>
+
+<%#= render 'table' %>
+
+<%= render 'rows' %>
+
+<%= back_button root_path %>
+
+<%= add_button new_course_path if true || current_user %>

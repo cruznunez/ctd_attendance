@@ -1,0 +1,25 @@
+<h3 class="card-title"><%= @course.name %> | <%= @semester.name %></h3>
+
+<p class="card-title">
+  <%= @semester.active ? 'Active' : 'Inactive' %>
+</p>
+
+<div class="flex-container">
+  <%= link_to 'Take Attendance', attendance_course_semester_path(@course, @semester), class: 'clickable-row' %>
+</div>
+
+<div class="flex-container justify-between card-title">
+  <p><%= @semester.students.size %> students</p>
+
+  <p>Attendance</p>
+</div>
+
+<div class="flex-container flex-column">
+  <% @semester.students.each do |student| %>
+    <%= student_attendance student %>
+  <% end %>
+</div>
+
+<%= back_button course_semesters_path @course %>
+
+<%= edit_button edit_course_semester_path @course, @semester %>

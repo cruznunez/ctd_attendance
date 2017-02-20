@@ -1,0 +1,33 @@
+<h2>Sign up</h2>
+
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+  <%= devise_error_messages! %>
+  <div class="card field">
+    <div>
+      <span>
+        <%= f.email_field :email, autofocus: true %>
+        <%= f.label :email %><br />
+      </span>
+    </div>
+
+    <div>
+      <span>
+        <%= f.password_field :password, autocomplete: :off %>
+        <%= f.label :password %>
+      </span>
+    </div>
+
+    <div>
+      <span>
+        <%= f.password_field :password_confirmation, autocomplete: :off %>
+        <%= f.label :password_confirmation %><br />
+      </span>
+    </div>
+
+    <%= f.submit style: 'display: none;' %>
+
+    <%= render "devise/shared/links" %>
+  </div>
+
+  <%= submit_button %>
+<% end %>

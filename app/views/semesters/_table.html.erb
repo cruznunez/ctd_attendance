@@ -1,0 +1,15 @@
+<table>
+  <!-- <thead>
+    <tr>
+      <th>Name</th>
+    </tr>
+  </thead> -->
+
+  <tbody>
+    <% @semesters.each do |semester| %>
+      <tr href="<%= course_semester_path semester.course_id, semester %>">
+        <td><%= semester.name %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

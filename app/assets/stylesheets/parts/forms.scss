@@ -1,0 +1,95 @@
+$focus-color: #4D90FE;
+$placeholder-color: lighten(black, 65%); // #A9A9A9 exact placeholder color
+$t1: 0.2s ease-out;
+$t2: 0.3s;
+$x: transparent;
+$y: $placeholder-color;
+$z: $focus-color;
+
+.field {
+  span {
+    display: inline-block;
+    position: relative;
+  }
+
+  label {
+    color: $y;
+    cursor: text;
+    font-weight: normal;
+    font-size: 16px;
+    @include position(absolute, 0 null null 0);
+    transition: all $t1;
+    width: auto;
+  }
+
+  input, select, textarea {
+    background: transparent;
+    border: 0;
+    border-bottom: 2px solid $y;
+    border-radius: 0;
+    font: inherit;
+    transition: border-color $t2;
+  }
+
+  input, select {
+    margin-bottom: 1em;
+  }
+
+  select {
+    width: 100%; 
+
+    @include appearance(none);
+    background-image:
+      linear-gradient(45deg, $x 50%, $y 50%),
+      linear-gradient(-45deg, $x 50%, $y 50%);
+    background-position:
+      calc(100% - 6px) 0.5em,
+      calc(100% - 1px) 0.5em;
+    background-repeat: no-repeat;
+    background-size:
+      5px 5px,
+      5px 6px;
+    border-radius: 0;
+    padding-right: 1em;
+
+    &:focus {
+      background-image:
+        linear-gradient(45deg, transparent 50%, $z 50%),
+        linear-gradient(-45deg, transparent 50%, $z 50%) !important;
+
+    }
+  }
+
+  textarea {
+    resize: vertical;
+    width: 100%;
+
+    // hide that bottom right corner grab thing
+    &::-webkit-resizer {
+      display: none;
+    }
+
+    & ~ .resize-handle {
+      cursor: ns-resize;
+      height: 10px;
+      width: 100%;
+      @include position(absolute, null null 0 null);
+    }
+  }
+
+  input:focus, input[value], textarea, select {
+    & ~ label {
+      font-size: 9px;
+      top: -1.5em;
+    }
+  }
+
+  input:focus, select:focus, textarea:focus {
+    border-color: $z !important;
+    outline: 0;
+
+    & ~ label {
+      color: $z;
+    }
+  }
+}

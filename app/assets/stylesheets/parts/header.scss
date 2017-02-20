@@ -1,0 +1,13 @@
+header {
+  background: white;
+  border-bottom: 1px solid #DBDBDB;
+  display: flex;
+  justify-content: space-between;
+
+  @include mobile {
+    padding: 16px 12px;
+  }
+  @include immobile {
+    padding: 16px 24px;
+  }
+}

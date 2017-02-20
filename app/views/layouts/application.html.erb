@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>CTD Attendance</title>
+    <%= csrf_meta_tags %>
+    <meta name="viewport" content="initial-scale=1">
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <%= flash_helper if flash.present? %>
+
+    <%= render 'layouts/header' %>
+
+    <div id="content">
+      <%= yield %>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,25 @@
+a {
+  color: $blue;
+  text-decoration: none;
+}
+
+.link {
+  border-bottom: 1px solid transparent;
+
+  &:hover {
+    border-color: currentColor;
+  }
+}
+
+.clickable-row {
+  @extend .link;
+  background: white;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  flex-grow: 1;
+  margin-bottom: 1em;
+  padding: 1em;
+
+  &:hover {
+    background: #F2F2F2; // #F9F9F9;
+  }
+}

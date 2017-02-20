@@ -1,0 +1,13 @@
+<h3 class="card-title">New</h3>
+
+<div id="roll">
+  <%= f.fields_for :students do |ff| %>
+    <%= ff.fields_for :attendances_attributes, index: 0 do |fff| %>
+      <%= fff.hidden_field :semester_id, value: @semester.id %>
+      <%= fff.hidden_field :date, value: date %>
+
+      <%= fff.check_box :present %>
+      <%= fff.label :present, ff.object.first_name %>
+    <% end %>
+  <% end %>
+</div>

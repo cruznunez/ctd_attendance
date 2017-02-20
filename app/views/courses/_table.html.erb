@@ -1,0 +1,15 @@
+<table>
+  <!-- <thead>
+    <tr>
+      <th>Name</th>
+    </tr>
+  </thead> -->
+
+  <tbody>
+    <% @courses.each do |course| %>
+      <tr href="<%= course_path course %>">
+        <td><%= course.name %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

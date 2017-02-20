@@ -1,0 +1,17 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background: #F1F1F1;
+  margin: 0;
+}
+
+#content {
+  @include mobile {
+    margin: 1% 2% 5%;
+  }
+  @include immobile {
+    margin: 1% 15% 5%;
+  }
+}

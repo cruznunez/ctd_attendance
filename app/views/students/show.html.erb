@@ -1,0 +1,35 @@
+<h2 class="card-title"><%= @student.name %></h2>
+
+<h4 class="card-title">Slack name</h4>
+
+<p class="card">
+  <%= @student.slack_name || '<i>missing</i>'.html_safe %>
+</p>
+
+<h4 class="card-title">Notes</h4>
+
+<p class="card"><%= @student.notes || '<i>missing</i>'.html_safe %></p>
+
+<h4 class="card-title">Attendance</h4>
+
+<div class="flex-container flex-column">
+  <% @semesters.each do |k, v| %>
+    <%= semester_attendance k, v %>
+  <% end %>
+</div>
+
+<% @semesters.each do |semester, attendances| %>
+  <h4 class="card-title"><%= semester.course.name %> | <%= semester.name %></h4>
+
+  <div class="flex-container wrap">
+    <% attendances.sort_by(&:date).each do |a| %>
+      <div class="day <%= 'present' if a.present %>">
+        <%= a.date.strftime("%a, %b %e") %>
+      </div>
+    <% end %>
+  </div>
+<% end %>
+
+<%= back_button students_path %>
+
+<%= edit_button edit_student_path @student %>

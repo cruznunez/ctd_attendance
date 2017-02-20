@@ -1,0 +1,43 @@
+.alert {
+  color: white;
+  display: flex;
+  text-align: center;
+  a {
+    color: white;
+  }
+  .msg {
+    padding: 0.5em 0 0.5em 38px;
+    flex-grow: 1;
+  }
+  &.green {
+    background: #4C9689; // slack green
+    // background: #279D6A: //convertio.co
+    // background: #00BF8F; // vine green
+    // background: #00BE8F; // vine green
+    &:hover {
+      background: #34B38C; // slack hover
+      // background: #00D9A3 // vine hover
+    }
+  }
+  &.yellow {
+    background: #DFA941;
+    &:hover {
+      background: #E8AC3C;
+    }
+  }
+  &.blue {
+    background: #2A80B9;
+    &:hover {
+    }
+  }
+  .close {
+    // @include position(absolute, null 0 null null);
+    align-items: center;
+    cursor: pointer;
+    display: flex;
+    // font-size: 25px;
+    justify-content: center;
+    width: 38px;
+    text-shadow: 0 1px 1px rgba(0,0,0,.25);
+  }
+}

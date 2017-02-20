@@ -1,0 +1,32 @@
+<%= form_for(student) do |f| %>
+  <div class="card field">
+    <span>
+      <%= f.text_field :first_name, autocomplete: :off %>
+      <%= f.label :first_name %>
+    </span>
+
+    <span>
+      <%= f.text_field :last_name, autocomplete: :off %>
+      <%= f.label :last_name %>
+    </span>
+
+    <div>
+      <span>
+        <%= f.text_field :slack_name, autocomplete: :off %>
+        <%= f.label :slack_name %>
+      </span>
+    </div>
+
+    <div>
+      <span style="width: 100%;">
+        <%= f.text_area :notes %>
+
+        <div class="resize-handle"></div>
+
+        <%= f.label :notes %>
+      </span>
+    </div>
+  </div>
+
+  <%= submit_button %>
+<% end %>

@@ -1,0 +1,30 @@
+<%= form_for([:course, semester]) do |f| %>
+  <div class="card field">
+    <div>
+      <span>
+        <%= f.text_field :name, autocomplete: :off %>
+        <%= f.label :name %>
+      </span>
+
+      <span>
+        <%= f.check_box :active %>
+        <%= f.label :active %>
+      </span>
+    </div>
+
+    <div class="flex-container">
+      <span class="flex-twin">
+        <%= select_tag 'semester[add_student]', options_for_select(semester.add_student), class: 'marginless', include_blank: true %>
+        <%= f.label :add_student %>
+      </span>
+
+      <span class="flex-twin">
+        <%= select_tag 'semester[remove_student]', options_for_select(semester.remove_student), class: 'marginless', include_blank: true %>
+        <%= f.label :remove_student %>
+      </span>
+    </div>
+
+  </div>
+
+  <%= submit_button %>
+<% end %>

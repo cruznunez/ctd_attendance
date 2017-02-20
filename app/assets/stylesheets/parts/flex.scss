@@ -1,0 +1,47 @@
+// All flex related styling
+.flex-container {
+  display: flex;
+}
+.flex-column {
+  flex-direction: column;
+}
+.align-between {
+  align-content: space-between;
+}
+.align-around {
+  align-content: space-around;
+}
+.align-center {
+  align-items: center;
+}
+.justify-between {
+  justify-content: space-between;
+}
+.justify-around {
+  justify-content: space-around;
+}
+.justify-center {
+  justify-content: center;
+}
+.justify-end {
+  justify-content: flex-end;
+}
+.wrap {
+  flex-wrap: wrap;
+}
+.wrap-mobile {
+  @include mobile {
+    flex-wrap: wrap;
+  }
+}
+.flex-twin {
+  width: 25%;
+
+  @include mobile {
+    flex-grow: 1;
+  }
+
+  & + .flex-twin {
+    margin-left: 1em;
+  }
+}

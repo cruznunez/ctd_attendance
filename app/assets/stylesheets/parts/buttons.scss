@@ -1,0 +1,41 @@
+#action, #back {
+  margin: 1em;
+}
+
+#action {
+  @include position(fixed, null 0 0 null);
+}
+
+#back {
+  @include position(fixed, null null 0 0);
+}
+
+#submit {
+  cursor: pointer;
+}
+
+.fa-stack {
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+
+  i + i {
+    color: white;
+  }
+}
+
+.fa-angle-left {
+  font-size: 1.5em;
+  margin-left: -2px;
+  transform: scaleY(0.9);
+  margin-top: -2px;
+}
+
+.fa-plus {
+  margin-top: 2px;
+}
+
+.fa {
+  &.gray { color: #777; }
+  &.green { color: $green; }
+  &.blue { color: #4D90FE; }
+  &.yellow { color: #F4B400; }
+}

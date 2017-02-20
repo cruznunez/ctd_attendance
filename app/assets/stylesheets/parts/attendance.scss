@@ -1,0 +1,86 @@
+#roll {
+  background: white;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+
+  label {
+    align-items: center;
+    border-left: 3px solid transparent;
+    border-bottom: 1px solid #EBEBEB;
+    color: #777;
+    cursor: pointer;
+    display: flex;
+    padding: 1em;
+    transition: border 0.5s;
+
+    @include immobile {
+      &:hover {
+        background: #F2F2F2; // #F9F9F9
+        &::before {
+          font-size: 1em;
+          margin-right: 4px;
+        }
+      }
+      &::before {
+        content: 'Here';
+        font-size: 0;
+        transition: font 0.6s, margin 0.6s;
+        vertical-align: middle;
+      }
+    }
+  }
+
+  input[type=checkbox] {
+    display: none;
+
+    &:checked + label {
+      color: $green;
+      border-left: 3px solid $green;
+
+      @include immobile {
+        &::before {
+          content: 'Absent';
+        }
+      }
+
+    }
+  }
+}
+
+.attendance {
+  @extend .clickable-row;
+  display: flex;
+  justify-content: space-between;
+  min-width: 100%;
+  position: relative;
+
+  &::before {
+    animation: filler 2s ease-in-out;
+    background: $green;
+    content: '\A';
+    height: 2px;
+    @include position(absolute, null null -1px 0);
+    transition: all 3s;
+    width: inherit;
+  }
+}
+
+@keyframes filler {
+  0% { width: 0; } // start at zero
+  10% { width: 0; } // stay at zero for 10% of the time
+}
+
+.day {
+  @extend .card;
+
+  color: #777;
+
+  &.present {
+    color: $green;
+  }
+
+  & + .day {
+    margin-left: 1em;
+  }
+}
