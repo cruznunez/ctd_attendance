@@ -8,8 +8,14 @@ class SemestersController < ApplicationController
   end
 
   # GET /semesters/1
+  # def show
+  #   @semester = Semester.includes(students: [:attendances])
+  #                       .order('students.first_name')
+  #                       .find params[:id]
+  # end
+
   def show
-    @semester = Semester.includes(students: [:attendances])
+    @semester = Semester.includes(:students, :attendances)
                         .order('students.first_name')
                         .find params[:id]
   end
