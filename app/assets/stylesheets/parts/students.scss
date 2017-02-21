@@ -1,0 +1,10 @@
+#profile-img {
+  @extend .card;
+  max-width: calc(90px + 2em);
+  transition: all 0.6s;
+
+  &:hover {
+    max-width: 100%;
+    padding: 0;
+  }
+}

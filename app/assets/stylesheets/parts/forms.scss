@@ -36,7 +36,7 @@ $z: $focus-color;
   }
 
   select {
-    width: 100%; 
+    width: 100%;
 
     @include appearance(none);
     background-image:
@@ -92,4 +92,26 @@ $z: $focus-color;
       color: $z;
     }
   }
+}
+
+// image file field
+#profile-img-file-field {
+  cursor: pointer;
+  height: calc(100% + 17px);
+  width: 100%;
+  opacity: 0;
+  @include position(absolute, -17px null null 0);
+}
+.profile-img-container {
+  position: relative;
+  height: 70px;
+  width: 70px;
+  img {
+    width: 100%;
+  }
+}
+#img-preview {
+  background: center/cover;
+  height: 70px;
+  width: 70px;
 }

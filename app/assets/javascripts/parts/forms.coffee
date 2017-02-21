@@ -4,6 +4,19 @@ datePicker = ->
   $('#date').change ->
     Turbolinks.visit "#{window.location.pathname}?date=#{@.value}"
 
+previewImage = ->
+  $('#profile-img-file-field').change ->
+    pix = @.files # array of images
+
+    # functions
+    setBackground = (url = '/plus.png') ->
+      url = URL.createObjectURL pix[0] if pix.length
+      $('#img-preview').css 'background-image', "url(#{url})"
+      setTimeout (-> URL.revokeObjectURL url), 1000
+
+    # execute this function
+    setBackground()
+
 resizeHandle = ->
   drag = (handle) ->
     height = $(handle).position().top
@@ -25,5 +38,6 @@ updateInput = ->
 
 $(window).on 'turbolinks:load', datePicker
 $(window).on 'turbolinks:load', resizeHandle
+$(window).on 'turbolinks:load', previewImage
 $(window).on 'turbolinks:load', submitForm
 $(window).on 'turbolinks:load', updateInput

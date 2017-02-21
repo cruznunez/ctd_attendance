@@ -1,5 +1,10 @@
-<%= form_for(student) do |f| %>
+<%= form_for student, html: { multipart: true } do |f| %>
   <div class="card field">
+    <div class="profile-img-container mar-bot">
+      <%= f.file_field :image, accept: 'image/png,image/jpeg', id: 'profile-img-file-field', title: 'Image' %>
+      <%= content_tag :div, nil, id: 'img-preview', style: "background-image: url(#{student.image.url(:thumb)})" %>
+    </div>
+
     <span>
       <%= f.text_field :first_name, autocomplete: :off %>
       <%= f.label :first_name %>
@@ -19,7 +24,7 @@
 
     <div>
       <span style="width: 100%;">
-        <%= f.text_area :notes %>
+        <%= f.text_area :notes, rows: 3 %>
 
         <div class="resize-handle"></div>
 

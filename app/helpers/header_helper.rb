@@ -1,7 +1,7 @@
 module HeaderHelper
   def destroy
     if request.path['edit']
-      delete_button @student || @semester || @course
+      delete_button @student || @semester || @course || @user
     else
       logout_button
     end
@@ -11,6 +11,7 @@ module HeaderHelper
     path = case resource
     when Student then student_path resource
     when Semester then course_semester_path resource.course_id, resource
+    when User then user_path resource
     else course_path resource
     end
 

@@ -1,6 +1,7 @@
 class StudentsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, :authorize_teacher!
   before_action :set_student, only: [:edit, :update, :destroy]
+  after_action :verify_authorized
 
   helper_method :sort_column
 
@@ -58,11 +59,15 @@ class StudentsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def student_params
-      params.require(:student).permit(:first_name, :last_name, :slack_name, :notes)
+      params.require(:student).permit(:image, :first_name, :last_name, :slack_name, :notes)
     end
 
     def sort_column
       sort = params[:c]
       %w(first_name last_name slack_name).include?(sort) ? sort : 'first_name'
+    end
+
+    def authorize_teacher!
+      authorize Student
     end
 end

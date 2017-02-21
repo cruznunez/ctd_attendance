@@ -1,0 +1,17 @@
+<table>
+  <thead>
+    <tr>
+      <th>Email</th>
+      <th colspan="1"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @users.each do |user| %>
+      <tr href="<%= user_path user %>">
+        <td><%= user.email %></td>
+        <td><%= 'Teacher' if user.teacher %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

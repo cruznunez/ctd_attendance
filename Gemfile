@@ -7,6 +7,7 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
+gem 'aws-sdk', '~> 2.0' # for storing images on AWS S3
 gem 'bootstrap-sass' # for alerts/modal js
 gem 'bourbon' # mixins and stuff
 gem 'coffee-rails', '~> 4.2'
@@ -15,7 +16,9 @@ gem 'font-awesome-rails'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'nilify_blanks' # save empty values as nil in db
+gem 'paperclip', '~> 5.0.0' # image processor
 gem 'puma', '~> 3.0'
+gem 'pundit'
 gem 'rails', '~> 5.0.1'
 gem 'sass-rails', '~> 5.0'
 gem 'turbolinks', '~> 5'

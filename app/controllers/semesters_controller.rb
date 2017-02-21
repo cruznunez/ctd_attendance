@@ -1,6 +1,8 @@
 class SemestersController < ApplicationController
+  before_action :authenticate_user!, :authorize_teacher!
   before_action :set_semester, only: [:edit, :update, :destroy, :attendance]
   before_action :set_course, only: [:index, :show]
+  after_action :verify_authorized
 
   # GET /semesters
   def index
@@ -88,5 +90,9 @@ class SemestersController < ApplicationController
           ]
         ]
       )
+    end
+
+    def authorize_teacher!
+      authorize Semester
     end
 end

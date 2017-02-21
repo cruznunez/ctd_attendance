@@ -1,6 +1,7 @@
 class CoursesController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, :authorize_teacher!
   before_action :set_course, only: [:show, :edit, :update, :destroy]
+  after_action :verify_authorized
 
   # GET /courses
   def index
@@ -47,6 +48,10 @@ class CoursesController < ApplicationController
   end
 
   private
+    def authorize_teacher!
+      authorize Course
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_course
       @course = Course.find(params[:id])

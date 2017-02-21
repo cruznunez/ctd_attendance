@@ -2,6 +2,8 @@
 
 <h4 class="card-title">Slack name</h4>
 
+<%= image_tag @student.image, id: 'profile-img' %>
+
 <p class="card">
   <%= @student.slack_name || '<i>missing</i>'.html_safe %>
 </p>

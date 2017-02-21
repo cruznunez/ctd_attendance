@@ -5,6 +5,7 @@ class CreateStudents < ActiveRecord::Migration[5.0]
       t.string :last_name
       t.string :slack_name
       t.text :notes
+      t.attachment :image
     end
   end
 end

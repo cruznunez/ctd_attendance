@@ -38,13 +38,18 @@ ActiveRecord::Schema.define(version: 20170218233742) do
   end
 
   create_table "students", force: :cascade do |t|
-    t.string "first_name"
-    t.string "last_name"
-    t.string "slack_name"
-    t.text   "notes"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "slack_name"
+    t.text     "notes"
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
   end
 
   create_table "users", force: :cascade do |t|
+    t.boolean  "teacher"
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
     t.string   "reset_password_token"

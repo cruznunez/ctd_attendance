@@ -16,7 +16,6 @@
 
 <div class="flex-container flex-column">
   <% @semester.students.each do |student| %>
-    <%#= student_attendance student %>
     <%= student_attendance student, @semester.attendances %>
   <% end %>
 </div>
