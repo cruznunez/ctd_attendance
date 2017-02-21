@@ -1,8 +1,8 @@
 <h2 class="card-title"><%= @student.name %></h2>
 
-<h4 class="card-title">Slack name</h4>
-
 <%= image_tag @student.image, id: 'profile-img' %>
+
+<h4 class="card-title">Slack name</h4>
 
 <p class="card">
   <%= @student.slack_name || '<i>missing</i>'.html_safe %>
