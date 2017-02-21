@@ -59,7 +59,10 @@ class StudentsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def student_params
-      params.require(:student).permit(:image, :first_name, :last_name, :slack_name, :notes)
+      params.require(:student).permit(
+        :image, :first_name, :last_name, :slack_name, :email,
+        :phone_number, :notes
+      )
     end
 
     def sort_column

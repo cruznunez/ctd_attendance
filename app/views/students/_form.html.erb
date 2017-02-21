@@ -23,6 +23,18 @@
     </div>
 
     <div>
+      <span>
+        <%= f.email_field :email %>
+        <%= f.label :email %>
+      </span>
+
+      <span>
+        <%= f.text_field :phone_number %>
+        <%= f.label :phone_number %>
+      </span>
+    </div>
+
+    <div>
       <span style="width: 100%;">
         <%= f.text_area :notes, rows: 3 %>
 

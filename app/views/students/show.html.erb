@@ -2,15 +2,13 @@
 
 <%= image_tag @student.image, id: 'profile-img' %>
 
-<h4 class="card-title">Slack name</h4>
+<%= student_info @student, :slack_name %>
 
-<p class="card">
-  <%= @student.slack_name || '<i>missing</i>'.html_safe %>
-</p>
+<%= student_info @student, :email %>
 
-<h4 class="card-title">Notes</h4>
+<%= student_info @student, :phone_number %>
 
-<p class="card"><%= @student.notes || '<i>missing</i>'.html_safe %></p>
+<%= student_info @student, :notes %>
 
 <h4 class="card-title">Attendance</h4>
 

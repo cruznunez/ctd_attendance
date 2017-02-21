@@ -33,4 +33,12 @@ module StudentsHelper
       HTML
     end
   end
+
+  def student_info(student, name)
+    <<-HTML.html_safe
+      <h4 class="card-title">#{name.to_s.titleize}</h4>
+
+      <p class="card">#{@student.send(name) || '<i>missing</i>'}</p>
+    HTML
+  end
 end
