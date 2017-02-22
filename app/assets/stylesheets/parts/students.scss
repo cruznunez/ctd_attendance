@@ -7,3 +7,16 @@
     max-width: 100%;
   }
 }
+
+.day {
+  position: relative;
+
+  .delete {
+    color: $red;
+    height: 20px;
+    line-height: 20px;
+    text-align: center;
+    width: 20px;
+    @include position(absolute, 0 0 null null);
+  }
+}
