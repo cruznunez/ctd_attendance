@@ -1,12 +1,6 @@
-<h3 class="card-title">Edit</h3>
+<%= ff.fields_for :attendances_attributes, attendance, index: 0 do |fff| %>
+  <%= fff.hidden_field :id %>
 
-<div id="roll">
-  <%= f.fields_for :students, @attendances do |ff| %>
-    <%= ff.fields_for :attendances_attributes, ff.object, index: 0 do |fff| %>
-      <%= fff.hidden_field :id %>
-
-      <%= fff.check_box :present %>
-      <%= fff.label :present, ff.object.student.first_name %>
-    <% end %>
-  <% end %>
-</div>
+  <%= fff.check_box :present %>
+  <%= fff.label :present, ff.object.first_name %>
+<% end %>

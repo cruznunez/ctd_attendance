@@ -35,8 +35,8 @@
     display: none;
 
     &:checked + label {
-      color: $green;
       border-left: 3px solid $green;
+      color: $green;
 
       @include immobile {
         &::before {
@@ -44,6 +44,17 @@
         }
       }
 
+    }
+
+    &[disabled] + label {
+      border-left: 3px solid $red;
+      color: $red;
+
+      @include immobile {
+        &::before {
+          content: 'Enable';
+        }
+      }
     }
   }
 }
@@ -69,6 +80,7 @@
 @keyframes filler {
   0% { width: 0; } // start at zero
   10% { width: 0; } // stay at zero for 10% of the time
+  // then transition to whatever the .erb set the width to
 }
 
 .day {

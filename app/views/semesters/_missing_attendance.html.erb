@@ -1,0 +1,7 @@
+<%= ff.fields_for :attendances_attributes, index: 0, disabled: true do |fff| %>
+  <%= fff.hidden_field :semester_id, value: @semester.id, disabled: true %>
+  <%= fff.hidden_field :date, value: date, disabled: true %>
+
+  <%= fff.check_box :present, checked: true, disabled: true %>
+  <%= fff.label :present, ff.object.first_name, disabled: true %>
+<% end %>

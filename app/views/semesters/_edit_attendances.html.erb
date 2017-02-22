@@ -1,0 +1,12 @@
+<h3 class="card-title">Edit</h3>
+
+<div id="roll">
+  <%= f.fields_for :students do |ff| %>
+    <% attendance = @attendances.find { |x| x.student_id == ff.object.id } %>
+    <% if attendance %>
+      <%= render 'edit_attendance', ff: ff, attendance: attendance %>
+    <% else %>
+      <%= render 'missing_attendance', ff: ff %>
+    <% end %>
+  <% end %>
+</div>

@@ -30,7 +30,7 @@ class StudentsController < ApplicationController
     @student = Student.new(student_params)
 
     if @student.save
-      redirect_to @student, notice: 'Student created'
+      redirect_to students_path, notice: 'Student created'
     else
       render :new
     end

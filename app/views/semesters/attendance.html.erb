@@ -8,9 +8,9 @@
 
 <%= form_for @semester, url: course_semester_path(@semester.course_id, @semester) do |f| %>
   <% if @attendances %>
-    <%= render 'edit_attendance', f: f %>
+    <%= render 'edit_attendances', f: f %>
   <% else %>
-    <%= render 'new_attendance', f: f %>
+    <%= render 'new_attendances', f: f %>
   <% end %>
 <% end %>
 
