@@ -25,6 +25,7 @@
     <% attendances.sort_by(&:date).each do |a| %>
       <div class="day <%= 'present' if a.present %>">
         <%= a.date.strftime("%a, %b %e") %>
+        <%= link_to 'x', a, method: :delete, data: { confirm: 'Delete this record?' } %>
       </div>
     <% end %>
   </div>

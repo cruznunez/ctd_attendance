@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'attendances/destroy'
+
   root 'pages#home'
   devise_for :users
   resources :courses do
@@ -14,4 +16,5 @@ Rails.application.routes.draw do
     end
   end
   resources :users
+  resources :attendances, only: :destroy
 end

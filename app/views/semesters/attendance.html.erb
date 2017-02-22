@@ -6,6 +6,9 @@
   </span>
 </h3>
 
+<p>Current time: <%= Time.now.strftime('%r %D') %></p>
+<p>Time zone: <%= Time.zone %></p>
+
 <%= form_for @semester, url: course_semester_path(@semester.course_id, @semester) do |f| %>
   <% if @attendances %>
     <%= render 'edit_attendances', f: f %>
