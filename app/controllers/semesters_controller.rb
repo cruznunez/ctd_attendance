@@ -1,6 +1,6 @@
 class SemestersController < ApplicationController
   before_action :authenticate_user!, :authorize_teacher!
-  before_action :set_semester, only: [:edit, :update, :destroy, :attendance]
+  before_action :set_semester, only: [:edit, :update, :destroy]
   before_action :set_course, only: [:index, :show]
   after_action :verify_authorized
 
@@ -32,13 +32,13 @@ class SemestersController < ApplicationController
   def edit
   end
 
+  #  233ms (Views: 225.0ms | ActiveRecord: 1.0ms)
   def attendance
     date = params[:date] || Date.today
-    if Attendance.where(semester_id: @semester.id, date: date).any?
-      @attendances = Attendance.includes(:student)
-                               .order('students.first_name')
-                               .where semester_id: @semester.id, date: date
-    end
+    @semester = Semester.includes(:students)
+                        .order('students.first_name')
+                        .find params[:id]
+    @attendances = Attendance.where semester_id: @semester.id, date: date
   end
 
   # POST /semesters
