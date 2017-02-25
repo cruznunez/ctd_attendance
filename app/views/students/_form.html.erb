@@ -5,15 +5,17 @@
       <%= content_tag :div, nil, id: 'img-preview', style: "background-image: url(#{student.image.url(:thumb)})" %>
     </div>
 
-    <span>
-      <%= f.text_field :first_name, autocomplete: :off %>
-      <%= f.label :first_name %>
-    </span>
+    <div class="flex-container">
+      <span class="flex-twin">
+        <%= f.text_field :first_name, autocomplete: :off, class: 'wide' %>
+        <%= f.label :first_name %>
+      </span>
 
-    <span>
-      <%= f.text_field :last_name, autocomplete: :off %>
-      <%= f.label :last_name %>
-    </span>
+      <span class="flex-twin">
+        <%= f.text_field :last_name, autocomplete: :off, class: 'wide' %>
+        <%= f.label :last_name %>
+      </span>
+    </div>
 
     <div>
       <span>
@@ -22,14 +24,14 @@
       </span>
     </div>
 
-    <div>
-      <span>
-        <%= f.email_field :email %>
+    <div class="flex-container">
+      <span class="flex-twin">
+        <%= f.email_field :email, class: 'wide' %>
         <%= f.label :email %>
       </span>
 
-      <span>
-        <%= f.text_field :phone_number %>
+      <span class="flex-twin">
+        <%= f.text_field :phone_number, class: 'wide' %>
         <%= f.label :phone_number %>
       </span>
     </div>
