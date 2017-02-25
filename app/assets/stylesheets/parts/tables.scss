@@ -2,36 +2,39 @@ table {
   background: white;
   border-collapse: collapse;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+table.index {
   width: 100%;
-}
 
-th {
-  padding: 0.5em 0;
-}
-
-tbody tr {
-  cursor: pointer;
-
-  @include immobile {
-    &:hover {
-      background: #F2F2F2;
-    }
+  th {
+    padding: 0.5em 0;
   }
-}
 
-td {
-  border-top: 1px solid lightgray;
+  tbody tr {
+    cursor: pointer;
 
-  @include mobile {
-    padding: 10px 0 10px 0;
-
-    &:first-child {
-      padding-left: 5px;
+    @include immobile {
+      &:hover {
+        background: #F2F2F2;
+      }
     }
   }
 
-  @include immobile {
-    padding: 10px;
+  td {
+    border-top: 1px solid lightgray;
+
+    @include mobile {
+      padding: 10px 0 10px 0;
+
+      &:first-child {
+        padding-left: 5px;
+      }
+    }
+
+    @include immobile {
+      padding: 10px;
+    }
   }
 }
 

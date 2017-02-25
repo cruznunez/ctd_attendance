@@ -1,0 +1,67 @@
+#calendars .calendar {
+  margin-bottom: 1em;
+
+  @include mobile {
+    width: 100%;
+  }
+  @include immobile {
+    width: 45%;
+  }
+
+  td, th {
+    padding: 6px;
+  }
+
+  th {
+    width: 14%;
+    color: #666;
+    text-align: center;
+  }
+
+  td {
+    background: #FFF;
+    color: #777;
+    font-size: 10px;
+    height: 40px;
+    // text-align: center;
+    vertical-align: top;
+  }
+
+  .notmonth {
+    color: #EEE;
+    &:hover {
+      background: white;
+    }
+  }
+
+  .present, .absent {
+    cursor: pointer;
+    position: relative;
+  }
+  .present {
+    background-color: $green;
+    color: white;
+    &:hover {
+      background: darken($green, 5%);
+    }
+  }
+  .absent {
+    background: #F2F2F2;
+    &:hover {
+      background: darken(#F2F2F2, 5%);
+    }
+  }
+  .today { border: 1px solid $blue; } // #D7F2FF
+}
+
+#calendars #month {
+  margin: 0;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  text-align: center;
+  a {
+    text-decoration: none;
+    padding: 0 10px;
+    color: #999;
+  }
+}

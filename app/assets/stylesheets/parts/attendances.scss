@@ -87,12 +87,17 @@
   @extend .card;
 
   color: #777;
+  margin-bottom: 1em;
 
   &.present {
     color: $green;
   }
+}
 
-  & + .day {
-    margin-left: 1em;
-  }
+// for delete button
+
+.delete {
+  height: 100%;
+  @include position(absolute, 0 0 0 0);
+  width: 100%;
 }

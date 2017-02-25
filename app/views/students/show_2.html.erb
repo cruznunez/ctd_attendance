@@ -21,9 +21,14 @@
 <% @semesters.each do |semester, attendances| %>
   <h4 class="card-title"><%= semester.course.name %> | <%= semester.name %></h4>
 
-  <div id="calendars" class="flex-container justify-between wrap">
-    <% attendances.sort_by(&:date).group_by { |x| [x.date.year, x.date.month] }.each do |month, a| %>
-      <%= calendar month, a %>
+  <div class="flex-container justify-between wrap">
+    <% attendances.sort_by(&:date).each do |a| %>
+      <div class="day <%= 'present' if a.present %>">
+        <%= a.date.strftime("%a, %b %e") %>
+        <%= link_to a, class: 'delete', data: { confirm: 'Delete this record?' }, method: :delete do %>
+          <i class="fa fa-trash-o" aria-hidden="true"></i>
+        <% end %>
+      </div>
     <% end %>
   </div>
 <% end %>

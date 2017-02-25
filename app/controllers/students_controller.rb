@@ -14,6 +14,7 @@ class StudentsController < ApplicationController
     @student = Student.includes(attendances: [semester: [:course]])
                       .find params[:id]
     @semesters = @student.attendances.group_by &:semester
+    @date = Date.today
   end
 
   # GET /students/new
