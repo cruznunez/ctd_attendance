@@ -1,7 +1,10 @@
+require 'benchmark'
+
 module CalendarHelper
   def calendar(yearmonth, attendances)
-    @month = Date.new *yearmonth
+    @month = Date.new(*yearmonth)
     @attendances = attendances
+    # optimize
     table
   end
 
@@ -42,22 +45,34 @@ module CalendarHelper
   end
 
   def day_cell(day)
-    attendance = @attendances.find { |x| x.date == day }
-    button = if attendance
-      link = link_to 'Delete', attendance, class: 'link', data: { confirm: 'Delete this record?' }, method: :delete
-      link.gsub!('"', "'")
+    a = @attendances.find { |x| x.date == day }
 
+    button = if a
       <<-HTML
-        <a class="delete" role="button" data-toggle="popover" tabindex="0" title="Day" data-content="#{link}"></a>
+        <a class="expand" role="button" data-toggle="popover" tabindex="0" title="Day" data-content='#{edit_attendance a}#{delete_attendance a}'></a>
       HTML
     else
       nil
     end
 
     <<-HTML
-      <td class="#{day_classes(day, attendance)}">
+      <td class="#{day_classes day, a}">
         #{day.day}#{button}
       </td>
+    HTML
+  end
+
+  def edit_attendance(a)
+    s = a.semester
+
+    <<-HTML
+      <a class="link" href="/courses/#{s.course_id}/semesters/#{s.id}/attendance?date=#{a.date}">Edit</a>
+    HTML
+  end
+
+  def delete_attendance(attendance)
+    <<-HTML
+      <a class="link" data-confirm="Delete this record?" rel="nofollow" data-method="delete" href="/attendances/#{attendance.id}">Delete</a>
     HTML
   end
 
