@@ -5,7 +5,7 @@ class ProjectsController < ApplicationController
 
   # GET /projects
   def index
-    @projects = Project.all
+    @projects = Project.order("#{sort_column} #{sort_direction}")
   end
 
   # GET /projects/1

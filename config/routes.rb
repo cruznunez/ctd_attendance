@@ -13,11 +13,15 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :projects
+  resources :projects do
+    collection do
+      patch '', action: :index # for sortability
+    end
+  end
 
   resources :students do
     collection do
-      patch '', action: :index
+      patch '', action: :index # for sortability
     end
   end
 
