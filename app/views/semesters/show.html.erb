@@ -9,7 +9,7 @@
 </div>
 
 <div class="flex-container justify-between card-title">
-  <p><%= @semester.students.size %> students</p>
+  <p><%= pluralize @semester.students.size, 'student' %></p>
 
   <p>Attendance</p>
 </div>

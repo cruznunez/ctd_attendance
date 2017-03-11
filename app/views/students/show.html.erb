@@ -28,6 +28,14 @@
   </div>
 <% end %>
 
+<h4 class="card-title">Projects</h4>
+
+<div class="flex-container flex-column">
+  <% @student.projects.each do |project| %>
+    <%= link_to project.name, project, class: 'clickable-row' %>
+  <% end %>
+</div>
+
 <%= back_button students_path %>
 
 <%= edit_button edit_student_path @student %>

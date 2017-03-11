@@ -11,7 +11,8 @@ class StudentsController < ApplicationController
   end
 
   def show
-    @student = Student.includes(attendances: [semester: [:course]])
+    @student = Student.includes(:projects, attendances: [semester: [:course]])
+                      .order('projects.name')
                       .find params[:id]
     @semesters = @student.attendances.group_by &:semester
     @date = Date.today

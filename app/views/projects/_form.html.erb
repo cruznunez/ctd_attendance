@@ -1,0 +1,40 @@
+<%= form_for(project) do |f| %>
+  <div class="card field">
+    <div>
+      <span>
+        <%= f.text_field :name %>
+        <%= f.label :name %>
+      </span>
+    </div>
+
+    <div>
+      <span>
+        <%= f.text_field :url %>
+        <%= f.label :url %>
+      </span>
+    </div>
+
+    <div class="mar-bot">
+      <span style="width: 100%;">
+        <%= f.text_area :description %>
+        <%= f.label :description %>
+      </span>
+    </div>
+
+    <div class="flex-container">
+      <span class="flex-twin">
+        <%= select_tag 'project[add_student]', options_for_select(project.add_student), class: 'marginless', include_blank: true %>
+        <%= f.label :add_student %>
+      </span>
+
+      <span class="flex-twin">
+        <%= select_tag 'project[remove_student]', options_for_select(project.remove_student), class: 'marginless', include_blank: true %>
+        <%= f.label :remove_student %>
+      </span>
+    </div>
+  </div>
+
+  <%= f.submit style: 'display: none;' %>
+
+  <%= submit_button %>
+<% end %>

@@ -1,0 +1,34 @@
+<h2 class="card-title"><%= @project.name %></h2>
+
+<h4 class="card-title">URL</h4>
+
+<p class="card">
+  <% if @project.url %>
+    <%= link_to @project.url, @project.url, target: '_blank' %>
+  <% else %>
+    <i>missing</i>
+  <% end %>
+</p>
+
+<h4 class="card-title">Description:</h4>
+
+<p class="card">
+  <% if @project.description %>
+    <%= @project.description %>
+  <% else %>
+    <i>missing</i>
+  <% end %>
+</p>
+
+<h4 class="card-title"><%= pluralize @project.students.size, 'student' %></h4>
+
+<div class="flex-container flex-column">
+  <% @project.students.each do |student| %>
+    <%= link_to student.first_name, student, class: 'clickable-row' %>
+  <% end %>
+</div>
+
+
+<%= back_button projects_path %>
+
+<%= edit_button edit_project_path @project %>

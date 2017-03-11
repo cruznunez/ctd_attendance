@@ -1,0 +1,15 @@
+<table class="index">
+  <thead>
+    <tr>
+      <th><%= sortable 'name' %></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @projects.each do |project| %>
+      <tr href="<%= project_path project %>">
+        <td><%= project.name %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
