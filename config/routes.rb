@@ -17,6 +17,12 @@ Rails.application.routes.draw do
     collection do
       patch '', action: :index # for sortability
     end
+
+    resources :stand_ups, except: [:show, :edit] do
+      collection do
+        get ':date/edit' => 'stand_ups#edit', as: :edit
+      end
+    end
   end
 
   resources :students do

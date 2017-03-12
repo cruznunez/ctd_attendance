@@ -23,7 +23,7 @@
 
   <div id="calendars" class="flex-container justify-between wrap">
     <% attendances.sort_by(&:date).group_by { |x| [x.date.year, x.date.month] }.each do |month, a| %>
-      <%= calendar month, a %>
+      <%= attendance_calendar month, a %>
     <% end %>
   </div>
 <% end %>

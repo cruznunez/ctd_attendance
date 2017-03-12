@@ -1,5 +1,7 @@
 class Project < ApplicationRecord
   has_and_belongs_to_many :students
+  has_many :stand_ups
+  accepts_nested_attributes_for :stand_ups
   validates_presence_of :name
 
   # list students not added yet

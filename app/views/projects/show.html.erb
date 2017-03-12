@@ -1,5 +1,10 @@
 <h2 class="card-title"><%= @project.name %></h2>
 
+<%= link_to project_stand_ups_path(@project), class: 'clickable-row flex-container justify-between' do %>
+  <span>Stand Ups</span>
+  <i class="fa fa-arrow-right fa-lg" aria-hidden="true" style="line-height: 1;"></i>
+<% end %>
+
 <h4 class="card-title">URL</h4>
 
 <p class="card">

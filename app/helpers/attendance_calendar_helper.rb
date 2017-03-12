@@ -1,20 +1,17 @@
-require 'benchmark'
-
-module CalendarHelper
-  def calendar(yearmonth, attendances)
+module AttendanceCalendarHelper
+  def attendance_calendar(yearmonth, attendances)
     @month = Date.new(*yearmonth)
     @attendances = attendances
-    # optimize
-    table
+    attendance_table
   end
 
   HEADER = %w(S M T W T F S)
   START_DAY = :sunday
 
-  def table
+  def attendance_table
     <<-HTML.html_safe
     <table class="calendar">
-      #{header}#{week_rows}
+      #{header}#{attendance_week_rows}
     </table>
     HTML
   end
@@ -28,11 +25,11 @@ module CalendarHelper
     HTML
   end
 
-  def week_rows
+  def attendance_week_rows
     weeks.map do |week|
       <<-HTML
       <tr>
-        #{week.map { |day| day_cell(day) }.join}
+        #{week.map { |day| attendance_day_cell(day) }.join}
       </tr>
       HTML
     end.join
@@ -44,7 +41,7 @@ module CalendarHelper
     (first..last).to_a.in_groups_of(7)
   end
 
-  def day_cell(day)
+  def attendance_day_cell(day)
     a = @attendances.find { |x| x.date == day }
 
     button = if a
@@ -56,7 +53,7 @@ module CalendarHelper
     end
 
     <<-HTML
-      <td class="#{day_classes day, a}">
+      <td class="#{attendance_day_classes day, a}">
         #{day.day}#{button}
       </td>
     HTML
@@ -76,11 +73,11 @@ module CalendarHelper
     HTML
   end
 
-  def day_classes(day, attendance)
-      classes = []
-      classes << 'today' if day == Date.today
-      classes << 'notmonth' if day.month != @month.month
-      classes << { true => 'present', false => 'absent' }[attendance&.present]
-      classes.empty? ? nil : classes.join(' ')
-    end
+  def attendance_day_classes(day, attendance)
+    classes = []
+    classes << 'today' if day == Date.today
+    classes << 'notmonth' if day.month != @month.month
+    classes << { true => 'present', false => 'absent' }[attendance&.present]
+    classes.empty? ? nil : classes.join(' ')
+  end
 end

@@ -1,6 +1,6 @@
 class AttendancesController < ApplicationController
-  before_action :authenticate_user!, :authorize_teacher!
   after_action :verify_authorized
+  before_action :authenticate_user!, :authorize_teacher!
 
   def destroy
     attendance = Attendance.find params[:id]

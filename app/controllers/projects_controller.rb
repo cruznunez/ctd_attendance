@@ -1,4 +1,7 @@
 class ProjectsController < ApplicationController
+  after_action :verify_authorized
+
+  before_action :authenticate_user!, :authorize_teacher!
   before_action :set_project, only: [:edit, :update, :destroy]
 
   helper_method :sort_column
@@ -29,7 +32,7 @@ class ProjectsController < ApplicationController
     @project = Project.new(project_params)
 
     if @project.save
-      redirect_to @project, notice: 'Project was successfully created.'
+      redirect_to @project, notice: 'Project created'
     else
       render :new
     end
@@ -38,8 +41,9 @@ class ProjectsController < ApplicationController
   # PATCH/PUT /projects/1
   def update
     if @project.update(project_params)
-      redirect_to @project, notice: 'Project was successfully updated.'
+      redirect_to @project, notice: 'Project updated'
     else
+      flash.alert @project.errors.to_a.join '. '
       render :edit
     end
   end
@@ -47,7 +51,7 @@ class ProjectsController < ApplicationController
   # DELETE /projects/1
   def destroy
     @project.destroy
-    redirect_to projects_url, notice: 'Project was successfully destroyed.'
+    redirect_to projects_url, notice: 'Project destroyed'
   end
 
   private
@@ -58,11 +62,18 @@ class ProjectsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def project_params
-      params.require(:project).permit(:name, :url, :description, :add_student, :remove_student)
+      params.require(:project).permit(
+        :name, :url, :description, :add_student, :remove_student,
+        stand_ups_attributes: [:id, :student_id, :date, :completed, :goals, :obstacles]
+      )
     end
 
     def sort_column
       sort = params[:c]
       %w(name).include?(sort) ? sort : 'name'
+    end
+
+    def authorize_teacher!
+      authorize Project
     end
 end

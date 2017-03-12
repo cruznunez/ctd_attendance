@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  project: one
+  student: one
+  date: 2017-03-11
+  completed: MyText
+  goals: MyText
+  obstacles: MyText
+
+two:
+  project: two
+  student: two
+  date: 2017-03-11
+  completed: MyText
+  goals: MyText
+  obstacles: MyText

@@ -1,0 +1,43 @@
+<%= form_for @project do |f| %>
+  <h3 class="card-title">
+    Stand up for
+
+    <span class="field">
+      <%= text_field_tag :date, date, size: 10 %>
+    </span>
+  </h3>
+
+  <% @project.students.each do |student| %>
+    <h4 class="card-title"><%= student.first_name %></h4>
+
+    <div class="card field mar-bot">
+      <%= f.fields_for :stand_ups_attributes, index: student.id do |ff| %>
+        <%= ff.hidden_field :student_id, value: student.id %>
+        <%= ff.hidden_field :date, value: date %>
+
+        <div>Last Week</div>
+
+        <div>Goals: TO DO</div>
+
+        <div class="mar-bot">Obstacles: TO DO</div>
+
+        <span class="wide mar-bot">
+          <%= ff.text_area :completed %>
+          <%= ff.label :completed %>
+        </span>
+
+        <span class="wide mar-bot">
+          <%= ff.text_area :goals %>
+          <%= ff.label :goals %>
+        </span>
+
+        <span class="wide">
+          <%= ff.text_area :obstacles %>
+          <%= ff.label :obstacles %>
+        </span>
+      <% end %>
+    </div>
+  <% end %>
+
+  <%= submit_button %>
+<% end %>

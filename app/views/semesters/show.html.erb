@@ -5,8 +5,14 @@
 </p>
 
 <div class="flex-container">
-  <%= link_to 'Take Attendance', attendance_course_semester_path(@course, @semester), class: 'clickable-row' %>
+  <%#= link_to 'Take Attendance', attendance_course_semester_path(@course, @semester), class: 'clickable-row' %>
 </div>
+
+<%= link_to attendance_course_semester_path(@course, @semester), class: 'clickable-row flex-container justify-between' do %>
+  <span>Take Attendance</span>
+  <i class="fa fa-arrow-right fa-lg" aria-hidden="true" style="line-height: 1;"></i>
+<% end %>
+
 
 <div class="flex-container justify-between card-title">
   <p><%= pluralize @semester.students.size, 'student' %></p>
