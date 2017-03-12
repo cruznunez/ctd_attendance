@@ -2,7 +2,7 @@ class StandUpsController < ApplicationController
   after_action :verify_authorized
 
   before_action :authenticate_user!, :authorize_teacher!
-  before_action :set_stand_up, only: [:show, :update, :destroy]
+  before_action :set_stand_up, only: [:show, :update]
 
   # GET /stand_ups
   def index
@@ -52,8 +52,10 @@ class StandUpsController < ApplicationController
 
   # DELETE /stand_ups/1
   def destroy
-    @stand_up.destroy
-    redirect_to stand_ups_url, notice: 'Stand up deleted'
+    date = params[:id].to_date
+    @project = Project.find params[:project_id]
+    @project.stand_ups.where(date: date).destroy_all
+    redirect_to project_stand_ups_path(@project), notice: 'Stand up deleted'
   end
 
   private

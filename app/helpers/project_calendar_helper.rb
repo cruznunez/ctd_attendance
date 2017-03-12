@@ -54,7 +54,7 @@ module ProjectCalendarHelper
   def delete_stand_up(stand_up)
     p_id = params[:project_id]
     <<-HTML
-      <a class="link" data-confirm="Delete this record?" rel="nofollow" data-method="delete" href="projects/#{p_id}/stand_ups/#{stand_up.id}">Delete</a>
+      <a class="link" data-confirm="Delete this record?" rel="nofollow" data-method="delete" href="/projects/#{p_id}/stand_ups/#{stand_up.date}">Delete</a>
     HTML
   end
 
