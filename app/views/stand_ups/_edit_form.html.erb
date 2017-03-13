@@ -17,12 +17,14 @@
       <%= f.fields_for :stand_ups_attributes, stand_up, index: student.id do |ff| %>
         <%= ff.hidden_field :id %>
 
-        <div>Previously: <%= previous.date %></div>
+        <% if previous %>
+          <div>Previously: <%= previous.date.strftime('%b %e, %Y') %></div>
 
-        <ul>
-          <li>Goals: <%= previous.goals %></li>
-          <li>Obstacles: <%= previous.obstacles %></li>
-        </ul>
+          <ul>
+            <li>Goals: <%= previous.goals %></li>
+            <li>Obstacles: <%= previous.obstacles %></li>
+          </ul>
+        <% end %>
 
         <span class="wide mar-bot">
           <%= ff.text_area :completed %>
