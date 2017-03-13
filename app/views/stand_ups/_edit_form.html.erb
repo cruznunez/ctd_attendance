@@ -8,7 +8,7 @@
   </h3>
 
   <% @project.students.each do |student| %>
-    <% prev = @project.stand_ups.select { |x| x.student_id == student.id && x.date < date.to_date }.sort_by(&:date).last %>
+    <% previous = @project.stand_ups.select { |x| x.student_id == student.id && x.date < date.to_date }.sort_by(&:date).last %>
     <% stand_up = @project.stand_ups.find { |x| x.student_id == student.id }  %>
 
     <h4 class="card-title"><%= student.first_name %></h4>
@@ -17,11 +17,11 @@
       <%= f.fields_for :stand_ups_attributes, stand_up, index: student.id do |ff| %>
         <%= ff.hidden_field :id %>
 
-        <div>Previously: <%= prev.date %></div>
+        <div>Previously: <%= previous.date %></div>
 
         <ul>
-          <li>Goals: <%= prev.goals %></li>
-          <li>Obstacles: <%= prev.obstacles %></li>
+          <li>Goals: <%= previous.goals %></li>
+          <li>Obstacles: <%= previous.obstacles %></li>
         </ul>
 
         <span class="wide mar-bot">
