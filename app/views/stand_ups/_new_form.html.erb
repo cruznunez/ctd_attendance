@@ -17,11 +17,11 @@
         <%= ff.hidden_field :student_id, value: student.id %>
         <%= ff.hidden_field :date, value: date %>
 
-        <div>Previously: <%= previous.date %></div>
+        <div>Previously: <%= previous&.date %></div>
 
         <ul>
-          <li>Goals: <%= previous.goals %></li>
-          <li>Obstacles: <%= previous.obstacles %></li>
+          <li>Goals: <%= previous&.goals %></li>
+          <li>Obstacles: <%= previous&.obstacles %></li>
         </ul>
 
         <span class="wide mar-bot">
