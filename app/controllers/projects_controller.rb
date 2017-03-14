@@ -43,7 +43,7 @@ class ProjectsController < ApplicationController
     if @project.update(project_params)
       redirect_to @project, notice: 'Project updated'
     else
-      flash.alert @project.errors.to_a.join '. '
+      flash.alert = @project.errors.to_a.join '. '
       render :edit
     end
   end

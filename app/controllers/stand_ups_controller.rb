@@ -15,7 +15,7 @@ class StandUpsController < ApplicationController
     project_id = params[:project_id]
     date = params[:date] || Date.today
     @project = Project.includes(:stand_ups, :students)
-                      .order('students.first_name')
+                      .order('stand_ups.date', 'students.first_name')
                       .find project_id
     if @project.stand_ups.select { |x| x.date == date.to_date }[0]
       redirect_to edit_project_stand_ups_path(project_id, date)
@@ -26,7 +26,7 @@ class StandUpsController < ApplicationController
   def edit
     date = params[:date]
     @project = Project.includes(:stand_ups, :students)
-                      .order('students.first_name')
+                      .order('stand_ups.date', 'students.first_name')
                       .find params[:project_id]
   end
 
