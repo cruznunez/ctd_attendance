@@ -12,8 +12,8 @@
   <% else %>
     <%= render 'new_attendances', f: f %>
   <% end %>
+
+  <%= submit_button f %>
 <% end %>
 
 <%= back_button course_semester_path @semester.course_id, @semester %>
-
-<%= submit_button %>

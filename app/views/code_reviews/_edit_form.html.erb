@@ -1,0 +1,61 @@
+<%= form_for [@project, @code_review] do |f| %>
+  <h4 class="card-title">Metrics</h4>
+
+  <div class="card field">
+    <span>
+      <%= f.number_field :loc, class: 'marginless' %>
+      <%= f.label :loc, 'LOC' %>
+    </span>
+
+    <span>
+      <%= f.number_field :smells, class: 'marginless' %>
+      <%= f.label :smells %>
+    </span>
+
+    <span>
+      <%= f.number_field :tests, class: 'marginless' %>
+      <%= f.label :tests %>
+    </span>
+
+    <span>
+      <%= f.number_field :failures, class: 'marginless' %>
+      <%= f.label :failures %>
+    </span>
+
+    <span>
+      <%= f.number_field :coverage, min: 0, max: 1000, step: 0.1, class: 'marginless' %>
+      <%= f.label :coverage %>%
+    </span>
+  </div>
+
+  <h4 class="card-title">Checklist</h4>
+
+  <div class="card">
+    Run the following to look at code since last review:<br>
+    <b>gitk --all --since="2017-03-16"</b>
+  </div>
+
+  <h4 class="card-title">Comments (students will receive)</h4>
+
+  <div class="card field">
+    <span class="wide">
+      <%= f.text_area :comments, id: :comments %>
+      <%= f.label :comments, 'Markdown capable' %>
+    </span>
+  </div>
+
+  <%= render 'preview', id: :comments_preview, text: @code_review.comments %>
+
+  <h4 class="card-title">Notes (students will not see)</h4>
+
+  <div class="card field">
+    <span class="wide">
+      <%= f.text_area :notes, id: :notes %>
+      <%= f.label :notes_preview, 'Markdown capable' %>
+    </span>
+  </div>
+
+  <%= render 'preview', id: :notes_preview, text: @code_review.notes %>
+
+  <%= submit_button f %>
+<% end %>

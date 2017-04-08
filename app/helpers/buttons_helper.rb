@@ -32,8 +32,9 @@ module ButtonsHelper
     link_to button, path, id: 'action'
   end
 
-  def submit_button
+  def submit_button(f)
     <<-HTML.html_safe
+      #{f.submit style: 'display: none;'}
       <div id="action">
         <span id="submit" class="fa-stack fa-2x">
           <i class="fa fa-circle fa-stack-2x green"></i>

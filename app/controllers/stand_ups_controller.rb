@@ -22,9 +22,9 @@ class StandUpsController < ApplicationController
     end
   end
 
-  # GET /stand_ups/2017-01-01/edit
+  # GET /projects/1/stand_ups/2017-01-01/edit
   def edit
-    date = params[:date]
+    # really we should only load the stand ups from teh dates, etc
     @project = Project.includes(:stand_ups, :students)
                       .order('stand_ups.date', 'students.first_name')
                       .find params[:project_id]

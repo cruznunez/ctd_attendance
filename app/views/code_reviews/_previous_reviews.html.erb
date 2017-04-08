@@ -1,0 +1,24 @@
+<% if previous_reviews.size == 1 %>
+  <h3 class="card-title">Last Review</h3>
+<% else %>
+  <h3 class="card-title">Last 2 Reviews</h3>
+<% end %>
+
+<% previous_reviews.each do |review| %>
+  <div class="gray1 card">
+    <b>
+      <%= review.date.strftime '%b %e, %Y' %>
+      <i>(<%= distance_of_time_in_words(review.date, Date.today) %> ago)</i>
+    </b>
+  </div>
+
+  <div class="card">
+    <b class="gray1">Comments</b>
+    <div class="gray2"><%= full_md review.comments %></div>
+  </div>
+
+  <div class="card mar-bot">
+    <b class="gray1">Notes</b>
+    <div class="gray2"><%= full_md review.notes %></div>
+  </div>
+<% end %>

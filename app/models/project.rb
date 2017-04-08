@@ -1,5 +1,6 @@
 class Project < ApplicationRecord
   has_and_belongs_to_many :students
+  has_many :code_reviews
   has_many :stand_ups
   accepts_nested_attributes_for :stand_ups, reject_if: :reject_stand_up?
   validates_presence_of :name

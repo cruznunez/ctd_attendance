@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   root 'pages#home'
+  get '/preview_review' => 'code_reviews#preview'
 
   devise_for :users
 
@@ -20,7 +21,13 @@ Rails.application.routes.draw do
 
     resources :stand_ups, except: [:show, :edit] do
       collection do
-        get ':date/edit' => 'stand_ups#edit', as: :edit
+        get ':date/edit' => 'stand_ups#edit', as: :edit # for a cleaner url
+      end
+    end
+
+    resources :code_reviews, except: [:show, :edit] do
+      collection do
+        get ':date/edit' => 'code_reviews#edit', as: :edit # replaces edit
       end
     end
   end

@@ -1,0 +1,35 @@
+<h3 class="card-title"><%= @project.name %> | Code Reviews</h3>
+
+<%= link_to new_project_code_review_path, class: 'clickable-row flex-container justify-between' do %>
+  <span>Code Review</span>
+  <i class="fa fa-arrow-right fa-lg" aria-hidden="true" style="line-height: 1;"></i>
+<% end %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>LOC</th>
+      <th>Smells</th>
+      <th>Tests</th>
+      <th>Failures</th>
+      <th>Coverage</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @code_reviews.each do |code_review| %>
+      <tr>
+        <td><%= code_review.date %></td>
+        <td><%= code_review.loc %></td>
+        <td><%= code_review.smells %></td>
+        <td><%= code_review.tests %></td>
+        <td><%= code_review.failures %></td>
+        <td><%= code_review.coverage %></td>
+        <td><%= link_to 'Edit', "/projects/#{@project.id}/code_reviews/#{code_review.date}/edit" %></td>
+        <td><%= link_to 'Destroy', project_code_review_path(@project, code_review), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

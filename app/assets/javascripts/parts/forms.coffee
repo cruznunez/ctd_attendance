@@ -17,6 +17,12 @@ previewImage = ->
     # execute this function
     setBackground()
 
+previewReview = -> # rap god
+  $('#comments,#notes').on 'input', ->
+    $.ajax
+      type: 'GET', url: '/preview_review'
+      data: text: $(@).val(), id: $(@).attr 'id'
+
 resizeHandle = ->
   drag = (handle) ->
     height = $(handle).position().top
@@ -30,7 +36,7 @@ resizeHandle = ->
       drag: -> drag @,
       stop: -> drag @
 
-submitForm = -> $('#submit').click -> $('form').submit()
+submitForm = -> $('#submit').click -> $('input[type=submit]').click()
 
 updateInput = ->
   $('.field input').on 'input', ->
@@ -39,5 +45,6 @@ updateInput = ->
 $(window).on 'turbolinks:load', datePicker
 $(window).on 'turbolinks:load', resizeHandle
 $(window).on 'turbolinks:load', previewImage
+$(window).on 'turbolinks:load', previewReview
 $(window).on 'turbolinks:load', submitForm
 $(window).on 'turbolinks:load', updateInput

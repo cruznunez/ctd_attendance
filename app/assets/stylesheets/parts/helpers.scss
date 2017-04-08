@@ -4,9 +4,16 @@
 .mar-bot {
   margin-bottom: 1em;
 }
+.pad-bot {
+  padding-bottom: 1em;
+}
 .wide {
   width: 100%;
 }
-.light-gray {
-  color: lightgray;
+.gray1 {
+  color: gray; // dark
+}
+.gray2 {
+  color: #A6A6A6; // lighter
+  // color: lightgray; // even lighter
 }

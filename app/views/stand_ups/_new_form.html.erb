@@ -1,12 +1,4 @@
 <%= form_for @project do |f| %>
-  <h3 class="card-title">
-    Stand up for
-
-    <span class="field">
-      <%= text_field_tag :date, date, size: 10 %>
-    </span>
-  </h3>
-
   <% @project.students.each do |student| %>
     <% previous = @project.stand_ups.select { |x| x.student_id == student.id && x.date < date.to_date }.last %>
 
@@ -37,5 +29,5 @@
     </div>
   <% end %>
 
-  <%= submit_button %>
+  <%= submit_button f %>
 <% end %>

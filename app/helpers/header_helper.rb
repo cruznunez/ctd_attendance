@@ -1,6 +1,6 @@
 module HeaderHelper
   def destroy
-    return if request.path['stand_ups']
+    return if request.path['stand_ups'] || request.path['code_reviews']
     if request.path['edit']
       delete_button @student || @semester || @course || @user || @project
     else

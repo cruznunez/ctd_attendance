@@ -1,0 +1,63 @@
+<%= form_for [@project, @code_review] do |f| %>
+  <%= f.hidden_field :date, value: date if hidden_date %>
+
+  <h3 class="card-title">Metrics</h3>
+
+  <div class="card field">
+    <span>
+      <%= f.number_field :loc, class: 'marginless', required: true %>
+      <%= f.label :loc, 'LOC' %>
+    </span>
+
+    <span>
+      <%= f.number_field :smells, class: 'marginless', required: true %>
+      <%= f.label :smells %>
+    </span>
+
+    <span>
+      <%= f.number_field :tests, class: 'marginless', required: true %>
+      <%= f.label :tests %>
+    </span>
+
+    <span>
+      <%= f.number_field :failures, class: 'marginless', required: true %>
+      <%= f.label :failures %>
+    </span>
+
+    <span>
+      <%= f.number_field :coverage, class: 'marginless', min: 0, max: 1000, step: 0.1, required: true %>
+      <%= f.label :coverage %>%
+    </span>
+  </div>
+
+  <h3 class="card-title">Checklist</h3>
+
+  <div class="card">
+    Run the following to look at code since last review:<br>
+    <b>gitk --all --since="2017-03-16"</b>
+  </div>
+
+  <h3 class="card-title">Comments (students will receive)</h3>
+
+  <div class="card field">
+    <span class="wide">
+      <%= f.text_area :comments, id: :comments %>
+      <%= f.label :comments, 'Markdown capable' %>
+    </span>
+  </div>
+
+  <%= render 'preview', id: :comments_preview, text: @code_review.comments || '' %>
+
+  <h3 class="card-title">Notes (students will not see)</h3>
+
+  <div class="card field">
+    <span class="wide">
+      <%= f.text_area :notes, id: :notes %>
+      <%= f.label :notes, 'Markdown capable' %>
+    </span>
+  </div>
+
+  <%= render 'preview', id: :notes_preview, text: @code_review.notes || '' %>
+
+  <%= submit_button f %>
+<% end %>

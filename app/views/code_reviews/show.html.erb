@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Loc:</strong>
+  <%= @code_review.loc %>
+</p>
+
+<p>
+  <strong>Smells:</strong>
+  <%= @code_review.smells %>
+</p>
+
+<p>
+  <strong>Tests:</strong>
+  <%= @code_review.tests %>
+</p>
+
+<p>
+  <strong>Failures:</strong>
+  <%= @code_review.failures %>
+</p>
+
+<p>
+  <strong>Coverage:</strong>
+  <%= @code_review.coverage %>
+</p>
+
+<p>
+  <strong>Comments:</strong>
+  <%= @code_review.comments %>
+</p>
+
+<p>
+  <strong>Notes:</strong>
+  <%= @code_review.notes %>
+</p>
+
+<%= link_to 'Edit', edit_code_review_path(@code_review) %> |
+<%= link_to 'Back', code_reviews_path %>
