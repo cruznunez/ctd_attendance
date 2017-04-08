@@ -22,17 +22,15 @@ ActiveRecord::Schema.define(version: 20170408142939) do
   end
 
   create_table "code_reviews", force: :cascade do |t|
-    t.integer  "project_id"
-    t.date     "date"
-    t.integer  "loc"
-    t.integer  "smells"
-    t.integer  "tests"
-    t.integer  "failures"
-    t.float    "coverage"
-    t.text     "comments"
-    t.text     "notes"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer "project_id"
+    t.date    "date"
+    t.integer "loc"
+    t.integer "smells"
+    t.integer "tests"
+    t.integer "failures"
+    t.float   "coverage"
+    t.text    "comments"
+    t.text    "notes"
     t.index ["project_id"], name: "index_code_reviews_on_project_id"
   end
 

@@ -12,8 +12,6 @@ class CreateCodeReviews < ActiveRecord::Migration[5.0]
       t.float :coverage
       t.text :comments
       t.text :notes
-
-      t.timestamps
     end
   end
 end
