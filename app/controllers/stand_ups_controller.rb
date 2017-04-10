@@ -17,6 +17,8 @@ class StandUpsController < ApplicationController
     @project = Project.includes(:stand_ups, :students)
                       .order('stand_ups.date', 'students.first_name')
                       .find project_id
+
+    # if a standup already exists for this date, redirect_to edit instead
     if @project.stand_ups.select { |x| x.date == date.to_date }[0]
       redirect_to edit_project_stand_ups_path(project_id, date)
     end
@@ -61,12 +63,14 @@ class StandUpsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_stand_up
-      @stand_up = StandUp.find(params[:id])
+      @stand_up = StandUp.find params[:id]
     end
 
     # Only allow a trusted parameter "white list" through.
     def stand_up_params
-      params.require(:stand_up).permit(:project_id, :student_id, :date, :completed, :goals, :obstacles)
+      params.require(:stand_up).permit(
+        :project_id, :student_id, :date, :completed, :goals, :obstacles
+      )
     end
 
     def authorize_teacher!

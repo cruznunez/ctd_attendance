@@ -1,16 +1,23 @@
 class CodeReviewsController < ApplicationController
   before_action :set_code_review, only: [:show, :update, :destroy]
   before_action :set_project, only: [:index, :new, :create, :edit]
+  helper_method :sort_column
 
   # GET /code_reviews
   def index
-    @code_reviews = @project.code_reviews
+    @code_reviews = @project.code_reviews.order "#{sort_column} #{sort_direction}"
   end
 
   # GET /code_reviews/new
   def new
-    @code_review = CodeReview.new project_id: @project.id
     date = params[:date] || Date.today
+
+    # if a review for this date and project already exists, go to edit page
+    if CodeReview.where(project_id: @project.id, date: date).any?
+      redirect_to edit_project_code_reviews_path @project, date
+    end
+
+    @code_review = CodeReview.new project_id: @project.id
     set_previous_reviews date
   end
 
@@ -20,6 +27,17 @@ class CodeReviewsController < ApplicationController
     date = params[:date]
     # @code_review = CodeReview.where(project_id: @project.id, date: date).first
     @code_review = @project.code_reviews.where(date: date).first
+    set_previous_reviews date
+  end
+
+  # GET /projects/1/code_reviews/form
+  # GET /projects/1/code_reviews/form?date=2017-01-01
+  # this action combines the new and edit actions into one because why not
+  def form
+    date = params[:date] || Date.today
+    @project = Project.find params[:project_id]
+    @code_review = CodeReview.where(project_id: @project.id, date: date)
+                             .first_or_initialize
     set_previous_reviews date
   end
 
@@ -82,5 +100,10 @@ class CodeReviewsController < ApplicationController
       params.require(:code_review).permit(
         :date, :loc, :smells, :tests, :failures, :coverage, :comments, :notes
       )
+    end
+
+    def sort_column
+      sort = params[:c]
+      %w(date loc smells tests failures coverage).include?(sort) ? sort : 'date'
     end
 end

@@ -1,0 +1,38 @@
+<table class="index">
+  <thead>
+    <tr>
+      <th><%= sortable 'date' %></th>
+      <th><%= sortable 'loc', 'LoC' %></th>
+      <th>
+        <span class="desktop-only"><%= sortable 'smells' %></span>
+        <span class="mobile-only"><%= sortable 'smells', 'S' %></span>
+      </th>
+      <th>
+        <span class="desktop-only"><%= sortable 'tests' %></span>
+        <span class="mobile-only"><%= sortable 'tests', 'T' %></span>
+      </th>
+      <th>
+        <span class="desktop-only"><%= sortable 'failures' %></span>
+        <span class="mobile-only"><%= sortable 'failures', 'F' %></span>
+      </th>
+      <th>
+        <span class="desktop-only"><%= sortable 'coverage' %></span>
+        <span class="mobile-only"><%= sortable 'coverage', 'C' %></span>
+      </th>
+      <th class="thin" colspan="1"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% code_reviews.each do |review| %>
+      <tr href="<%= review.edit_path %>">
+        <td><%= review.date.strftime '%-m/%-d/%y' %></td>
+        <td><%= review.loc %></td>
+        <td><%= review.smells %></td>
+        <td><%= review.tests %></td>
+        <td><%= review.failures %></td>
+        <td><%= review.coverage %>%</td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

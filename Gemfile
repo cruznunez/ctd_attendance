@@ -11,6 +11,7 @@ gem 'aws-sdk', '~> 2.0' # for storing images on AWS S3
 gem 'bootstrap-sass' # for alerts/modal js
 gem 'bourbon' # mixins and stuff
 gem 'coffee-rails', '~> 4.2'
+gem 'd3_rails'
 gem 'devise'
 gem 'font-awesome-rails'
 gem 'jquery-rails'

@@ -1,0 +1,33 @@
+#line-graph {
+  background: white;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  margin-bottom: 1em;
+
+  circle {
+    stroke: #000;
+    stroke-width: 2px;
+  }
+
+  .line {
+    fill: none;
+    stroke: #000;
+
+    @include mobile { stroke-width: 1px; }
+    @include immobile { stroke-width: 1.5px; }
+  }
+
+  .tick {
+    line { stroke: #000; }
+    text { font-size: 10px; }
+  }
+
+  .axis .domain {
+    fill: none;
+    stroke: #000;
+  }
+
+  .x.axis text {
+    text-anchor: start !important;
+    transform: rotate(20deg);
+  }
+}

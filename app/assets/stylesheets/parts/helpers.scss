@@ -10,10 +10,23 @@
 .wide {
   width: 100%;
 }
+.thin {
+  width: 1px;
+}
 .gray1 {
   color: gray; // dark
 }
 .gray2 {
   color: #A6A6A6; // lighter
   // color: lightgray; // even lighter
+}
+.desktop-only {
+  @include mobile {
+    display: none !important;
+  }
+}
+.mobile-only {
+  @include immobile {
+    display: none !important;
+  }
 }

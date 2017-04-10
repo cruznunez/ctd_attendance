@@ -4,5 +4,6 @@
 //= require bootstrap/alert
 //= require bootstrap/tooltip
 //= require bootstrap/popover
+//= require d3
 //= require turbolinks
 //= require_tree .

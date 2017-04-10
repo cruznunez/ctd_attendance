@@ -25,9 +25,11 @@ Rails.application.routes.draw do
       end
     end
 
-    resources :code_reviews, except: [:show, :edit] do
+    resources :code_reviews, except: [:show, :edit, :new] do
       collection do
-        get ':date/edit' => 'code_reviews#edit', as: :edit # replaces edit
+        patch '', action: :index # need this for sorting columns in table
+        get '/form' => 'code_reviews#form' # combines new and edit actions into one
+        # get ':date/edit' => 'code_reviews#edit', as: :edit # replaces edit
       end
     end
   end
