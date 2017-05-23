@@ -1,29 +1,35 @@
-<%= form_for([:course, semester]) do |f| %>
+<%= form_for [:course, semester] do |f| %>
+  <p class="card-title">Title</p>
+
   <div class="card field">
-    <div>
-      <span>
-        <%= f.text_field :name, autocomplete: :off %>
-        <%= f.label :name %>
-      </span>
+    <span>
+      <%= f.text_field :name, autocomplete: :off, class: 'm0' %>
+      <%= f.label :name %>
+    </span>
 
-      <span>
-        <%= f.check_box :active %>
-        <%= f.label :active %>
-      </span>
-    </div>
+    <span>
+      <%= f.check_box :active %>
+      <%= f.label :active %>
+    </span>
+  </div>
 
+  <p class="card-title"><%= pluralize @students.count, 'student' %></p>
+
+  <div id="roll">
+    <% @students.each do |student| %>
+      <%= f.check_box :student_ids, { multiple: true }, student.id, nil %>
+      <%= f.label "student_ids_#{student.id}", student.name %>
+    <% end %>
+  </div>
+
+  <div class="card field">
     <div class="flex-container">
-      <span class="flex-twin">
-        <%= select_tag 'semester[add_student]', options_for_select(semester.add_student), class: 'marginless', include_blank: true %>
-        <%= f.label :add_student %>
-      </span>
-
-      <span class="flex-twin">
-        <%= select_tag 'semester[remove_student]', options_for_select(semester.remove_student), class: 'marginless', include_blank: true %>
-        <%= f.label :remove_student %>
+      <span>
+        <%= hidden_field_tag 'semester[add_student]' %>
+        <%= text_field_tag 'student_search', nil, class: 'm0', id: 'autocomplete' %>
+        <%= label_tag :autocomplete, 'Add student' %>
       </span>
     </div>
-
   </div>
 
   <%= submit_button f %>

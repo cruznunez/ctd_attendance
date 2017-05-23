@@ -36,6 +36,7 @@ Rails.application.routes.draw do
 
   resources :students do
     collection do
+      put '', action: :index # for search
       patch '', action: :index # for sortability
     end
   end

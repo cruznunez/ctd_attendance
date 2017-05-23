@@ -14,7 +14,7 @@
       </span>
     </div>
 
-    <div class="mar-bot">
+    <div class="mb">
       <span class="wide">
         <%= f.text_area :description %>
         <%= f.label :description %>
@@ -23,12 +23,12 @@
 
     <div class="flex-container">
       <span class="flex-twin">
-        <%= select_tag 'project[add_student]', options_for_select(project.add_student), class: 'marginless', include_blank: true %>
+        <%= select_tag 'project[add_student]', options_for_select(project.add_student), class: 'm0', include_blank: true %>
         <%= f.label :add_student %>
       </span>
 
       <span class="flex-twin">
-        <%= select_tag 'project[remove_student]', options_for_select(project.remove_student), class: 'marginless', include_blank: true %>
+        <%= select_tag 'project[remove_student]', options_for_select(project.remove_student), class: 'm0', include_blank: true %>
         <%= f.label :remove_student %>
       </span>
     </div>

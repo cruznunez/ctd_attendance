@@ -1,6 +1,6 @@
 <%= form_for student, html: { multipart: true } do |f| %>
   <div class="card field">
-    <div class="profile-img-container mar-bot">
+    <div class="profile-img-container mb">
       <%= f.file_field :image, accept: 'image/png,image/jpeg', id: 'profile-img-file-field', title: 'Image' %>
       <%= content_tag :div, nil, id: 'img-preview', style: "background-image: url(#{student.image.url(:thumb)})" %>
     </div>

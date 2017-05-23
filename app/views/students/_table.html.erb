@@ -1,19 +1,23 @@
-<table class="index">
-  <thead>
-    <tr>
-      <th><%= sortable 'first_name' %></th>
-      <th><%= sortable 'last_name' %></th>
-      <th><%= sortable 'slack_name' %></th>
-    </tr>
-  </thead>
+<div id="table">
+  <div class="card-title mb"><%= pluralize @students.count, 'result' %></div>
 
-  <tbody>
-    <% @students.each do |student| %>
-      <tr href="<%= student_path student %>">
-        <td><%= student.first_name %></td>
-        <td><%= student.last_name %></td>
-        <td><%= student.slack_name %></td>
+  <table class="index">
+    <thead>
+      <tr>
+        <th><%= sortable 'first_name' %></th>
+        <th><%= sortable 'last_name' %></th>
+        <th><%= sortable 'slack_name' %></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+
+    <tbody>
+      <% @students.each do |student| %>
+        <tr href="<%= student_path student %>">
+          <td><%= student.first_name %></td>
+          <td><%= student.last_name %></td>
+          <td><%= student.slack_name %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

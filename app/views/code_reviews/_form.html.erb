@@ -5,27 +5,27 @@
 
   <div class="card field">
     <span>
-      <%= f.number_field :loc, class: 'marginless', required: true, min: 0 %>
+      <%= f.number_field :loc, class: 'm0', required: true, min: 0 %>
       <%= f.label :loc, 'LOC' %>
     </span>
 
     <span>
-      <%= f.number_field :smells, class: 'marginless', required: true, min: 0 %>
+      <%= f.number_field :smells, class: 'm0', required: true, min: 0 %>
       <%= f.label :smells %>
     </span>
 
     <span>
-      <%= f.number_field :tests, class: 'marginless', required: true, min: 0 %>
+      <%= f.number_field :tests, class: 'm0', required: true, min: 0 %>
       <%= f.label :tests %>
     </span>
 
     <span>
-      <%= f.number_field :failures, class: 'marginless', required: true, min: 0 %>
+      <%= f.number_field :failures, class: 'm0', required: true, min: 0 %>
       <%= f.label :failures %>
     </span>
 
     <span>
-      <%= f.number_field :coverage, class: 'marginless', min: 0, max: 1000, step: 0.1, required: true %>
+      <%= f.number_field :coverage, class: 'm0', min: 0, max: 1000, step: 0.1, required: true %>
       <%= f.label :coverage %>%
     </span>
   </div>

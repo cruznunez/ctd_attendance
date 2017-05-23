@@ -1,7 +1,7 @@
 class SemestersController < ApplicationController
   before_action :authenticate_user!, :authorize_teacher!
+  before_action :set_course # , only: [:index, :new, :create, :show, :edit]
   before_action :set_semester, only: [:edit, :update, :destroy]
-  before_action :set_course, only: [:index, :show]
   after_action :verify_authorized
 
   # GET /semesters
@@ -30,6 +30,7 @@ class SemestersController < ApplicationController
 
   # GET /semesters/1/edit
   def edit
+    @students = @semester.students.sort_by(&:name)
   end
 
   #  233ms (Views: 225.0ms | ActiveRecord: 1.0ms)
@@ -56,10 +57,12 @@ class SemestersController < ApplicationController
 
   # PATCH/PUT /semesters/1
   def update
-    # byebug
-    if @semester.update(semester_params)
-      course = Course.find params[:course_id]
-      redirect_to [course, @semester], notice: 'Semester updated'
+    if @semester.update semester_params
+      if request.xhr?
+        redirect_to edit_course_semester_path @course, @semester
+      else
+        redirect_to [@course, @semester], notice: 'Semester updated'
+      end
     else
       flash.alert = @semester.errors.to_a.join '. '
       render :edit
@@ -78,13 +81,14 @@ class SemestersController < ApplicationController
     end
     # Use callbacks to share common setup or constraints between actions.
     def set_semester
-      @semester = Semester.find params[:id]
+      @semester = @course.semesters.find params[:id]
     end
 
     # Only allow a trusted parameter "white list" through.
     def semester_params
       params.require(:semester).permit(
-        :name, :active, :add_student, :remove_student, students_attributes: [
+        :name, :active, :add_student, :remove_student, student_ids: [],
+        students_attributes: [
           :id, attendances_attributes: [
             :id, :semester_id, :present, :date
           ]

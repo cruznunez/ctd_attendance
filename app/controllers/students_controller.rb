@@ -7,7 +7,17 @@ class StudentsController < ApplicationController
 
   # GET /students
   def index
-    @students = Student.order("#{sort_column} #{sort_direction}")
+    query = params[:q] || params[:term]
+    @students = Student.search(query)
+                       .order("#{sort_column} #{sort_direction}")
+
+    if request.xhr?
+      if request.put?
+        render 'search.js' # for ajaxsearch
+      elsif request.get?
+        render 'search.json' # for autocomplete
+      end
+    end
   end
 
   def show

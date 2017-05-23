@@ -1,3 +1,4 @@
+#attendance,
 #roll {
   background: white;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
@@ -23,7 +24,6 @@
         }
       }
       &::before {
-        content: 'Here';
         font-size: 0;
         transition: font 0.6s, margin 0.6s;
         vertical-align: middle;
@@ -37,24 +37,37 @@
     &:checked + label {
       border-left: 3px solid $green;
       color: $green;
-
-      @include immobile {
-        &::before {
-          content: 'Absent';
-        }
-      }
-
     }
 
     &[disabled] + label {
       border-left: 3px solid $red;
       color: $red;
+    }
+  }
+}
 
-      @include immobile {
-        &::before {
-          content: 'Enable';
-        }
+#attendance {
+  @include immobile {
+    label::before {
+      content: 'Here';
+    }
+    input {
+      &:checked + label::before {
+        content: 'Absent';
       }
+      &[disabled] + label::before {
+        content: 'Enable';
+      }
+    }
+  }
+}
+#roll {
+  @include immobile {
+    label::before {
+      content: 'Add';
+    }
+    input:checked + label::before {
+      content: 'Remove';
     }
   }
 }

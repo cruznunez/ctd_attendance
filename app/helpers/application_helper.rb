@@ -3,7 +3,7 @@ module ApplicationHelper
     <<-HTML.strip_heredoc
       <div class="alert #{alert}">
         <div class="msg">#{msg}</div>
-        <div class="close" data-dismiss="alert">x</div>
+        <div class="close" data-dismiss="alert"></div>
       </div>
     HTML
   end

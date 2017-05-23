@@ -4,19 +4,19 @@
 
     <h4 class="card-title"><%= student.first_name %></h4>
 
-    <div class="card field mar-bot">
+    <div class="card field mb">
       <%= f.fields_for :stand_ups_attributes, index: student.id do |ff| %>
         <%= ff.hidden_field :student_id, value: student.id %>
         <%= ff.hidden_field :date, value: date %>
 
         <%= render 'previous', previous: previous if previous %>
 
-        <span class="wide mar-bot">
+        <span class="wide mb">
           <%= ff.text_area :completed %>
           <%= ff.label :completed %>
         </span>
 
-        <span class="wide mar-bot">
+        <span class="wide mb">
           <%= ff.text_area :goals %>
           <%= ff.label :goals %>
         </span>

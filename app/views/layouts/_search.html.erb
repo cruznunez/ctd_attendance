@@ -1,0 +1,6 @@
+<%= form_tag @path, enforce_utf8: false, id: 'search-form', class: 'form-search field', method: :put do %>
+  <%= hidden_field_tag :d, params[:d] %>
+  <%= hidden_field_tag :c, params[:c] %>
+  <i class="fa fa-search"></i>
+  <%= search_field_tag :q, params[:q], class: 'search', placeholder: placeholder, autofocus: true, autocomplete: :off %>
+<% end %>
