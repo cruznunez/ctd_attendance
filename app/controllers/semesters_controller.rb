@@ -49,7 +49,7 @@ class SemestersController < ApplicationController
     @semester = course.semesters.new(semester_params)
 
     if @semester.save
-      redirect_to [course, @semester], notice: 'Semester created'
+      redirect_to [course, @semester], notice: 'Semester added'
     else
       render :new
     end
@@ -72,7 +72,7 @@ class SemestersController < ApplicationController
   # DELETE /semesters/1
   def destroy
     @semester.destroy
-    redirect_to course_semesters_path, notice: 'Semester destroyed'
+    redirect_to course_semesters_path, notice: 'Semester deleted'
   end
 
   private

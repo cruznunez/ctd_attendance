@@ -13,24 +13,26 @@
     </span>
   </div>
 
-  <p class="card-title"><%= pluralize @students.count, 'student' %></p>
+  <% if semester.persisted? %>
+    <p class="card-title"><%= pluralize @students.count, 'student' %></p>
 
-  <div id="roll">
-    <% @students.each do |student| %>
-      <%= f.check_box :student_ids, { multiple: true }, student.id, nil %>
-      <%= f.label "student_ids_#{student.id}", student.name %>
-    <% end %>
-  </div>
-
-  <div class="card field">
-    <div class="flex-container">
-      <span>
-        <%= hidden_field_tag 'semester[add_student]' %>
-        <%= text_field_tag 'student_search', nil, class: 'm0', id: 'autocomplete' %>
-        <%= label_tag :autocomplete, 'Add student' %>
-      </span>
+    <div id="roll">
+      <% @students.each do |student| %>
+        <%= f.check_box :student_ids, { multiple: true }, student.id, nil %>
+        <%= f.label "student_ids_#{student.id}", student.name %>
+      <% end %>
     </div>
-  </div>
+
+    <div class="card field">
+      <div class="flex-container">
+        <span>
+          <%= hidden_field_tag 'semester[add_student]' %>
+          <%= text_field_tag 'student_search', nil, class: 'm0', id: 'autocomplete' %>
+          <%= label_tag :autocomplete, 'Add student' %>
+        </span>
+      </div>
+    </div>
+  <% end %>
 
   <%= submit_button f %>
 <% end %>
