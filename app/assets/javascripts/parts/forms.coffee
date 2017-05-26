@@ -18,8 +18,6 @@ ajaxSearch = ->
       , delay
 autocomplete = ->
   select = (ui) ->
-    # $('#semester_add_student').val ui.item.id
-    # $('[for=autocomplete]').html "Add #{ui.item.label}"
     url = $('form').attr 'action'
     $.ajax url: url, type: 'PATCH', data: semester: add_student: ui.item.id
   $('#autocomplete').autocomplete
