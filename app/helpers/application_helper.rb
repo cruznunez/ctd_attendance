@@ -20,5 +20,4 @@ module ApplicationHelper
   def date
     params[:date] || Date.today
   end
-
 end

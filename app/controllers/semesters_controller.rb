@@ -24,8 +24,7 @@ class SemestersController < ApplicationController
 
   # GET /semesters/new
   def new
-    # @course = Course.find params[:course_id]
-    @semester = Semester.new course_id: params[:course_id]
+    @semester = @course.semesters.new
   end
 
   # GET /semesters/1/edit
@@ -44,13 +43,12 @@ class SemestersController < ApplicationController
 
   # POST /semesters
   def create
-    course = Course.find params[:course_id]
-
-    @semester = course.semesters.new(semester_params)
+    @semester = @course.semesters.new(semester_params)
 
     if @semester.save
-      redirect_to [course, @semester], notice: 'Semester added'
+      redirect_to [@course, @semester], notice: 'Semester added'
     else
+      alert_errors @semester
       render :new
     end
   end
@@ -64,7 +62,8 @@ class SemestersController < ApplicationController
         redirect_to [@course, @semester], notice: 'Semester updated'
       end
     else
-      flash.alert = @semester.errors.to_a.join '. '
+      @students = @semester.students.sort_by(&:name)
+      alert_errors @semester
       render :edit
     end
   end

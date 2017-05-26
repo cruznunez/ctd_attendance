@@ -1,7 +1,7 @@
 <%= form_for course do |f| %>
   <div class="card field">
     <span>
-      <%= f.text_field :name, autocomplete: :off, class: 'm0' %>
+      <%= f.text_field :name, autocomplete: :off, class: 'm0', required: true %>
       <%= f.label :name %>
     </span>
   </div>
