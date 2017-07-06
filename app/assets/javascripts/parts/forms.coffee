@@ -30,6 +30,15 @@ datePicker = ->
   $('#date').change ->
     Turbolinks.visit "#{window.location.pathname}?date=#{@.value}"
 
+phoneFormatter = ->
+  $('[name*=phone]').on 'input', ->
+    num = $(@).val().replace /[^\d]/g, ''
+    if num.length == 7
+      num = num.replace /(\d{3})(\d{4})/, '$1-$2'
+    else if num.length == 10
+      num = num.replace /(\d{3})(\d{3})(\d{4})/, '($1) $2-$3'
+    $(@).val num
+
 previewImage = ->
   $('#profile-img-file-field').change ->
     pix = @.files # array of images
@@ -72,6 +81,7 @@ $(window).on 'turbolinks:load', ajaxSearch
 $(window).on 'turbolinks:load', autocomplete
 $(window).on 'turbolinks:load', datePicker
 $(window).on 'turbolinks:load', resizeHandle
+$(window).on 'turbolinks:load', phoneFormatter
 $(window).on 'turbolinks:load', previewImage
 $(window).on 'turbolinks:load', previewReview
 $(window).on 'turbolinks:load', submitForm
