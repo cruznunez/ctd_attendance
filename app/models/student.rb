@@ -7,7 +7,20 @@ class Student < ApplicationRecord
 
   has_attached_file :image, default_url: '/plus.png', styles: { thumb: '90x90#' }
 
+  # nilify_blanks only: [:slack_id], types: nil
+  # nilify_blanks only: %w(first_name last_name slack_name notes image_file_name image_content_type email phone_number slack_id)
+
   validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
+
+
+  # monkey patch to get the slack_id column to get nilified too
+  def self.content_columns
+    super << columns.find { |x| x.name == 'slack_id' }
+  end
+
+  def self.nilify_blanks_columns
+    super << 'slack_id'
+  end
 
   def name
     "#{first_name} #{last_name}"

@@ -27,7 +27,7 @@ module StudentsHelper
     present = total.select &:present
     percent = (present.size/total.size.to_f * 100).round rescue 0
     link_to student, class: 'attendance', style: "width: #{percent}%" do
-      <<-HTML.html_safe
+      <<~HTML.html_safe
         <span>#{student.first_name}</span>
         <span>#{percent}%</span>
       HTML
@@ -35,7 +35,7 @@ module StudentsHelper
   end
 
   def student_info(student, name)
-    <<-HTML.html_safe
+    <<~HTML.html_safe
       <h4 class="card-title">#{name.to_s.titleize}</h4>
 
       <p class="card">#{@student.send(name) || '<i>missing</i>'}</p>

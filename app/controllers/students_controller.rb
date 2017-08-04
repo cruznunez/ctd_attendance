@@ -42,7 +42,7 @@ class StudentsController < ApplicationController
     @student = Student.new(student_params)
 
     if @student.save
-      redirect_to students_path, notice: 'Student created'
+      redirect_to students_path, notice: 'Student added'
     else
       render :new
     end
@@ -72,7 +72,7 @@ class StudentsController < ApplicationController
     # Only allow a trusted parameter "white list" through.
     def student_params
       params.require(:student).permit(
-        :image, :first_name, :last_name, :slack_name, :email,
+        :image, :first_name, :last_name, :slack_name, :slack_id, :email,
         :phone_number, :notes
       )
     end

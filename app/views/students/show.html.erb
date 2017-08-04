@@ -2,7 +2,22 @@
 
 <%= image_tag @student.image, id: 'profile-img' %>
 
-<%= student_info @student, :slack_name %>
+<h4 class="card-title">Slack Name</h4>
+
+<% if @student.slack_name %>
+  <% if @student.slack_id %>
+    <%= link_to "slack://user?team=T07EHJ738&id=#{@student.slack_id}" do %>
+      <p class="card clickable-row flex-container justify-between">
+        <%= @student.slack_name %>
+        <i class="fa fa-slack fa-lg" aria-hidden="true" style="line-height: 1;"></i>
+      </p>
+    <% end %>
+  <% else %>
+    <p class="card"><%= @student.slack_name %></p>
+  <% end %>
+<% else %>
+  <p class="card"><i>missing</i></p>
+<% end %>
 
 <%= student_info @student, :email %>
 
