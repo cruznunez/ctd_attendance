@@ -11,7 +11,7 @@ module MarkdownHelper
   end
 
   # apperently we don't use simple md because RenderWithoutWrap doesn't exist or
-  # some shit
+  # something
   def simple_md(text)
     markdown = Redcarpet::Markdown.new(
       RenderWithoutWrap.new(
