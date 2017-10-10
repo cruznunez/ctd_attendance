@@ -1,4 +1,5 @@
 class Student < ApplicationRecord
+  before_save :update_slack_id, if: :slack_name_changed?
   has_and_belongs_to_many :projects
   has_and_belongs_to_many :semesters
   has_many :attendances, dependent: :destroy
@@ -45,5 +46,15 @@ class Student < ApplicationRecord
         ([search_phrase] * size).join(' AND ')
       ] + array_of_terms
     )
+  end
+
+  private
+
+  def update_slack_id
+    return unless slack_name
+    slack_data = Slack.new.users.find { |x| x['name'] == slack_name }['id']
+    self.slack_id = slack_data
+  rescue NoMethodError
+    self.slack_id = nil
   end
 end

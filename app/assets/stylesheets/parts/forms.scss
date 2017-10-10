@@ -29,6 +29,13 @@ $z: $focus-color;
     border-radius: 0;
     font: inherit;
     transition: border-color $t2;
+    &[disabled] {
+      color: #999;
+      cursor: not-allowed;
+      & + label {
+        cursor: not-allowed;
+      }
+    }
   }
 
   input, select {

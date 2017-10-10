@@ -14,6 +14,7 @@ gem 'coffee-rails', '~> 4.2'
 gem 'd3_rails'
 gem 'devise'
 gem 'font-awesome-rails'
+gem 'httparty'
 gem 'jbuilder', '~> 2.5' # for autocomplete API
 gem 'jquery-rails'
 gem 'jquery-ui-rails' # for autocomplete
