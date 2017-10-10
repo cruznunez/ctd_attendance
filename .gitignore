@@ -20,3 +20,6 @@
 # Ignore Byebug command history file.
 .byebug_history
 /benchmarks
+
+# Don't check in credentials
+config/env.yml

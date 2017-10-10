@@ -13,6 +13,7 @@ gem 'bourbon' # mixins and stuff
 gem 'coffee-rails', '~> 4.2'
 gem 'd3_rails'
 gem 'devise'
+gem 'envyable'
 gem 'font-awesome-rails'
 gem 'httparty'
 gem 'jbuilder', '~> 2.5' # for autocomplete API

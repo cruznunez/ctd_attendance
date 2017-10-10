@@ -4,11 +4,7 @@ class Slack
   base_uri 'slack.com'
 
   def initialize
-    @options = {
-      query: {
-        token: 'xoxp-7493619110-19410363652-254346946724-ac02dbe582a82f95a3a1ccb0d4358324'
-      }
-    }
+    @options = { query: { token: ENV['SLACK_KEY'] } }
   end
 
   def users
