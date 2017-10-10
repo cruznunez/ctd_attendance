@@ -13,6 +13,13 @@ class Student < ApplicationRecord
 
   validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
 
+  def name
+    "#{first_name} #{last_name}"
+  end
+
+  def slack_info
+    Slack.new.users.find { |x| x['name'] == slack_name }.to_o
+  end
 
   # monkey patch to get the slack_id column to get nilified too
   def self.content_columns
@@ -21,10 +28,6 @@ class Student < ApplicationRecord
 
   def self.nilify_blanks_columns
     super << 'slack_id'
-  end
-
-  def name
-    "#{first_name} #{last_name}"
   end
 
   def self.search(query)
@@ -52,8 +55,10 @@ class Student < ApplicationRecord
 
   def update_slack_id
     return unless slack_name
-    slack_data = Slack.new.users.find { |x| x['name'] == slack_name }['id']
+    slack_data = slack_info.id
+    img_url = slack_info.profile.image_original
     self.slack_id = slack_data
+    self.image = URI.parse img_url if img_url
   rescue NoMethodError
     self.slack_id = nil
   end
