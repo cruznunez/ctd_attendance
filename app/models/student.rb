@@ -1,5 +1,5 @@
 class Student < ApplicationRecord
-  before_save :update_slack_id, if: :slack_name_changed?
+  before_save :update_from_slack, if: :slack_name_changed?
   has_and_belongs_to_many :projects
   has_and_belongs_to_many :semesters
   has_many :attendances, dependent: :destroy
@@ -53,12 +53,12 @@ class Student < ApplicationRecord
 
   private
 
-  def update_slack_id
+  def update_from_slack
     return unless slack_name
     slack_data = slack_info.id
     img_url = slack_info.profile.image_original
     self.slack_id = slack_data
-    self.image = URI.parse img_url if img_url
+    self.image = URI.parse img_url if img_url # && image.url == '/plus.png'
   rescue NoMethodError
     self.slack_id = nil
   end

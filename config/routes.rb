@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
   root 'pages#home'
+  controller :pages do
+    get :faq
+  end
   get '/preview_review' => 'code_reviews#preview'
 
   devise_for :users
