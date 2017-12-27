@@ -21,15 +21,6 @@ class Student < ApplicationRecord
     Slack.new.users.find { |x| x['name'] == slack_name }.to_o
   end
 
-  # monkey patch to get the slack_id column to get nilified too
-  def self.content_columns
-    super << columns.find { |x| x.name == 'slack_id' }
-  end
-
-  def self.nilify_blanks_columns
-    super << 'slack_id'
-  end
-
   def self.search(query)
     return all unless query.present?
     size = query.split.size
