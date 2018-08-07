@@ -1,7 +1,7 @@
 <div class="flex-container flex-column">
   <%= link_to 'Courses', courses_path, class: 'clickable-row' %>
-  <%= link_to 'Projects', projects_path, class: 'clickable-row' %>
-  <%= link_to 'Students', students_path, class: 'clickable-row' %>
-  <%= link_to 'Users', users_path, class: 'clickable-row' %>
+  <%= link_to 'Projects', projects_path, class: 'clickable-row' if policy(:project).index? %>
+  <%= link_to 'Students', students_path, class: 'clickable-row' if policy(:student).index? %>
+  <%= link_to 'Users', users_path, class: 'clickable-row' if policy(:user).index? %>
   <%= link_to 'FAQs', faq_path, class: 'clickable-row' %>
 </div>

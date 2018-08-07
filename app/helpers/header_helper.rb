@@ -24,10 +24,18 @@ module HeaderHelper
   end
 
   def logout_button
-    link_to destroy_user_session_path, method: :delete do
-      <<-HTML.html_safe
+    if user_signed_in?
+      link_to destroy_user_session_path, method: :delete do
+        <<-HTML.html_safe
+          <i class="fa fa-power-off fa-lg" aria-hidden="true"></i>
+        HTML
+      end
+    elsif student_signed_in?
+      link_to destroy_student_session_path, method: :delete do
+        <<-HTML.html_safe
         <i class="fa fa-power-off fa-lg" aria-hidden="true"></i>
-      HTML
+        HTML
+      end
     end
   end
 end

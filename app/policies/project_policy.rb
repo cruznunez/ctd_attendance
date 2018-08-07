@@ -6,7 +6,7 @@ class ProjectPolicy < ApplicationPolicy
   end
 
   def teacher?
-    @user.teacher
+    @user.is_a?(User) && @user.teacher
   end
 
   %i(index? new? create? show? edit? update? destroy?).each do |ali|

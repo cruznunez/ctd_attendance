@@ -7,7 +7,7 @@
 
     <div class="flex-container">
       <span class="flex-twin">
-        <%= f.text_field :first_name, autocomplete: :off, class: 'wide' %>
+        <%= f.text_field :first_name, autocomplete: :off, autofocus: student.new_record?, class: 'wide' %>
         <%= f.label :first_name %>
       </span>
 
@@ -31,7 +31,7 @@
 
     <div class="flex-container">
       <span class="flex-twin">
-        <%= f.email_field :email, class: 'wide' %>
+        <%= f.email_field :email, class: 'wide', required: true %>
         <%= f.label :email %>
       </span>
 

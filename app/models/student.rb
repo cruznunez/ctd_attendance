@@ -1,4 +1,9 @@
 class Student < ApplicationRecord
+  # Include default devise modules. Others available are:
+  # :lockable, :timeoutable and :omniauthable
+  devise :confirmable, :database_authenticatable, #:registerable,
+         :recoverable, :rememberable, :trackable, :validatable
+
   before_save :update_from_slack, if: :slack_name_changed?
   has_and_belongs_to_many :projects
   has_and_belongs_to_many :semesters
@@ -52,5 +57,11 @@ class Student < ApplicationRecord
     self.image = URI.parse img_url if img_url # && image.url == '/plus.png'
   rescue NoMethodError
     self.slack_id = nil
+  end
+
+  protected
+
+  def password_required?
+    false
   end
 end

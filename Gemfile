@@ -30,8 +30,9 @@ gem 'turbolinks', '~> 5'
 gem 'uglifier', '>= 1.3.0'
 
 group :development, :test do
-  gem 'sqlite3'
   gem 'byebug', platform: :mri
+  gem 'letter_opener' # opens emails in new tab
+  gem 'sqlite3'
 end
 
 group :development do

@@ -9,6 +9,7 @@ class ApplicationController < ActionController::Base
     flash.alert = resource.errors.to_a.join '. '
   end
 
+
   private def user_not_authorized
     flash.alert = 'Access denied'
     redirect_to request.referrer || root_path

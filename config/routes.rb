@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   get '/preview_review' => 'code_reviews#preview'
 
   devise_for :users
+  devise_for :students, controllers: { confirmations: 'students/confirmations' }, skip: :registrations
 
   resources :attendances, only: :destroy
 
@@ -41,6 +42,10 @@ Rails.application.routes.draw do
     collection do
       put '', action: :index # for search
       patch '', action: :index # for sortability
+    end
+
+    member do
+      get :change_password
     end
   end
 
