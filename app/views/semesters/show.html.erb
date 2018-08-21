@@ -13,15 +13,15 @@
   <div class="card">
     <div class="flex-container justify-between">
       <span>Teacher:</span>
-      <%= @semester.teacher.email %>
+      <%= @semester.teacher&.email || '<i>none</i>'.html_safe %>
     </div>
     <div class="flex-container justify-between">
       <span>Teacher Assistant:</span>
-      <%= @semester.teacher_assistant.email %>
+      <%= @semester.teacher_assistant&.email || '<i>none</i>'.html_safe %>
     </div>
     <div class="flex-container justify-between">
       <span>Director:</span>
-      <%= @semester.director.email %>
+      <%= @semester.director&.email || '<i>none</i>'.html_safe %>
     </div>
   </div>
 
