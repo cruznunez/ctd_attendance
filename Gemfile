@@ -12,6 +12,7 @@ gem 'bootstrap-sass' # for alerts/modal js
 gem 'bourbon' # mixins and stuff
 gem 'coffee-rails', '~> 4.2'
 gem 'd3_rails'
+gem 'delayed_job_active_record' # backend queue handler with activerecord
 gem 'devise'
 gem 'envyable'
 gem 'font-awesome-rails'
@@ -31,7 +32,9 @@ gem 'uglifier', '>= 1.3.0'
 
 group :development, :test do
   gem 'byebug', platform: :mri
+  gem 'factory_bot_rails'
   gem 'letter_opener' # opens emails in new tab
+  gem 'rspec-rails'
   gem 'sqlite3'
 end
 

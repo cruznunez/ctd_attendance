@@ -1,32 +1,33 @@
 <h2 class="card-title"><%= @student.name %></h2>
 
 <%= image_tag @student.image, id: 'profile-img' %>
+<% if false %>
+  <details>
+    <summary class="card-title mb">Tracking info</summary>
 
-<% if current_user && current_user.teacher? %>
-  <h4 class="card-title">Tracking info</h4>
-
-  <div class="card">
-    <div class="flex-container justify-between">
-      <span>Sign in count:</span>
-      <%= @student.sign_in_count || '<i>missing</i>'.html_safe %>
+    <div class="card">
+      <div class="flex-container justify-between">
+        <span>Sign in count:</span>
+        <%= @student.sign_in_count || '<i>missing</i>'.html_safe %>
+      </div>
+      <div class="flex-container justify-between">
+        <span>Current sign in at:</span>
+        <%= full_date @student.current_sign_in_at %>
+      </div>
+      <div class="flex-container justify-between">
+        <span>Last sign in at:</span>
+        <%= full_date @student.last_sign_in_at %>
+      </div>
+      <div class="flex-container justify-between">
+        <span>Current sign in IP:</span>
+        <%= @student.current_sign_in_ip || '<i>missing</i>'.html_safe %>
+      </div>
+      <div class="flex-container justify-between">
+        <span>Last sign in IP:</span>
+        <%= @student.last_sign_in_ip || '<i>missing</i>'.html_safe %>
+      </div>
     </div>
-    <div class="flex-container justify-between">
-      <span>Current sign in at:</span>
-      <%= @student.current_sign_in_at || '<i>missing</i>'.html_safe %>
-    </div>
-    <div class="flex-container justify-between">
-      <span>Last sign in at:</span>
-      <%= @student.last_sign_in_at || '<i>missing</i>'.html_safe %>
-    </div>
-    <div class="flex-container justify-between">
-      <span>Current sign in IP:</span>
-      <%= @student.current_sign_in_ip || '<i>missing</i>'.html_safe %>
-    </div>
-    <div class="flex-container justify-between">
-      <span>Last sign in IP:</span>
-      <%= @student.last_sign_in_ip || '<i>missing</i>'.html_safe %>
-    </div>
-  </div>
+  </details>
 <% end %>
 
 <h4 class="card-title">Slack Name</h4>
@@ -48,31 +49,34 @@
 
 <%= student_info @student, :email %>
 
-<% if current_user && current_user.teacher? %>
-  <h4 class="card-title">Encrypted Password</h4>
+<% if current_user && current_user.teacher? && false %>
+  <details>
+    <summary class="card-title mb">Email Confirmation</summary>
 
-  <p class="card"><%= @student.encrypted_password.inspect %></p>
+    <div class="card">
+      <div class="flex-container justify-between">
+        <span>Confirmation token:</span>
+        <% if @student.confirmation_token %>
+          <%= link_to @student.confirmation_token, student_confirmation_path(confirmation_token: @student.confirmation_token) %>
+        <% else %>
+          <i>missing</i>
+        <% end %>
+      </div>
+      <div class="flex-container justify-between">
+        <span>Confirmed at:</span>
+        <%= full_date @student.confirmed_at %>
+      </div>
+      <div class="flex-container justify-between">
+        <span>Confirmation sent at:</span>
+        <%= full_date @student.confirmation_sent_at %>
+      </div>
+      <div class="flex-container justify-between">
+        <span>Unconfirmed email:</span>
+        <%= @student.unconfirmed_email || '<i>missing</i>'.html_safe %>
+      </div>
+    </div>
+  </details>
 
-  <h4 class="card-title">Email Confirmation</h4>
-
-  <div class="card">
-    <div class="flex-container justify-between">
-      <span>Confirmation token:</span>
-      <%= @student.confirmation_token || '<i>missing</i>'.html_safe %>
-    </div>
-    <div class="flex-container justify-between">
-      <span>Confirmed at:</span>
-      <%= @student.confirmed_at || '<i>missing</i>'.html_safe %>
-    </div>
-    <div class="flex-container justify-between">
-      <span>Confirmation sent at:</span>
-      <%= @student.confirmation_sent_at || '<i>missing</i>'.html_safe %>
-    </div>
-    <div class="flex-container justify-between">
-      <span>Unconfirmed email:</span>
-      <%= @student.unconfirmed_email || '<i>missing</i>'.html_safe %>
-    </div>
-  </div>
 <% end %>
 
 <%= student_info @student, :phone_number %>

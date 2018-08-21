@@ -13,6 +13,29 @@
     </span>
   </div>
 
+  <p class="card-title">Staff</p>
+
+  <div class="card field">
+    <span>
+      <%= f.select :teacher_id, User.pluck(:email, :id), include_blank: true %>
+      <%= f.label :teacher_id %>
+    </span>
+
+    <br>
+
+    <span>
+      <%= f.select :teacher_assistant_id, User.pluck(:email, :id), include_blank: true %>
+      <%= f.label :teacher_assistant_id %>
+    </span>
+
+    <br>
+
+    <span>
+      <%= f.select :director_id, User.pluck(:email, :id), include_blank: true %>
+      <%= f.label :director_id %>
+    </span>
+  </div>
+
   <% if semester.persisted? %>
     <p class="card-title"><%= pluralize @students.count, 'student' %></p>
 

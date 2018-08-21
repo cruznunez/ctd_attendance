@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180806153245) do
+ActiveRecord::Schema.define(version: 20180821185728) do
 
   create_table "attendances", force: :cascade do |t|
     t.integer "semester_id"
@@ -38,6 +38,21 @@ ActiveRecord::Schema.define(version: 20180806153245) do
     t.string "name"
   end
 
+  create_table "delayed_jobs", force: :cascade do |t|
+    t.integer  "priority",   default: 0, null: false
+    t.integer  "attempts",   default: 0, null: false
+    t.text     "handler",                null: false
+    t.text     "last_error"
+    t.datetime "run_at"
+    t.datetime "locked_at"
+    t.datetime "failed_at"
+    t.string   "locked_by"
+    t.string   "queue"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.index ["priority", "run_at"], name: "delayed_jobs_priority"
+  end
+
   create_table "projects", force: :cascade do |t|
     t.string   "name"
     t.string   "url"
@@ -57,6 +72,9 @@ ActiveRecord::Schema.define(version: 20180806153245) do
     t.integer "course_id"
     t.string  "name"
     t.boolean "active"
+    t.integer "teacher_id"
+    t.integer "teacher_assistant_id"
+    t.integer "director_id"
     t.index ["course_id"], name: "index_semesters_on_course_id"
   end
 
@@ -102,7 +120,6 @@ ActiveRecord::Schema.define(version: 20180806153245) do
     t.datetime "confirmation_sent_at"
     t.string   "unconfirmed_email"
     t.index ["confirmation_token"], name: "index_students_on_confirmation_token", unique: true
-    t.index ["email"], name: "index_students_on_email", unique: true
     t.index ["reset_password_token"], name: "index_students_on_reset_password_token", unique: true
   end
 

@@ -1,7 +1,7 @@
 class Student < ApplicationRecord
   # Include default devise modules. Others available are:
-  # :lockable, :timeoutable and :omniauthable
-  devise :confirmable, :database_authenticatable, #:registerable,
+  # :lockable, :timeoutable, :omniauthable, :registerable, :confirmable
+  devise :database_authenticatable,
          :recoverable, :rememberable, :trackable, :validatable
 
   before_save :update_from_slack, if: :slack_name_changed?

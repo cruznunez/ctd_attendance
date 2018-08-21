@@ -1,11 +1,16 @@
 class CoursesController < ApplicationController
-  before_action :authenticate_user!, :authorize_teacher!
+  before_action :authenticate_person!, :authorize_course!
   before_action :set_course, only: [:show, :edit, :update, :destroy]
   after_action :verify_authorized
 
   # GET /courses
   def index
-    @courses = Course.all
+    if current_student
+      ids = current_student.semesters.pluck :course_id
+      @courses = Course.where id: ids
+    elsif current_user
+      @courses = Course.all
+    end
   end
 
   # GET /courses/1
@@ -50,7 +55,7 @@ class CoursesController < ApplicationController
   end
 
   private
-    def authorize_teacher!
+    def authorize_course!
       authorize Course
     end
 
@@ -62,5 +67,9 @@ class CoursesController < ApplicationController
     # Only allow a trusted parameter "white list" through.
     def course_params
       params.require(:course).permit :name, :active
+    end
+
+    def pundit_user
+      current_person
     end
 end

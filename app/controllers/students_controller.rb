@@ -89,14 +89,8 @@ class StudentsController < ApplicationController
 
   private
 
-    def authenticate_person!
-      return if user_signed_in? || student_signed_in?
-      message = t('devise.failure.unauthenticated')
-      redirect_to new_student_session_path, alert: message
-    end
-
     def pundit_user # overrides the pundit current_user lookup
-      current_user || current_student
+      current_person
     end
 
     # Use callbacks to share common setup or constraints between actions.

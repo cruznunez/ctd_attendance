@@ -1,8 +1,15 @@
 class Semester < ApplicationRecord
   belongs_to :course
+  belongs_to :director, class_name: :User
+  belongs_to :teacher, class_name: :User
+  belongs_to :teacher_assistant, class_name: :User
+
   has_and_belongs_to_many :students
-  accepts_nested_attributes_for :students
+
   has_many :attendances, dependent: :destroy
+
+  accepts_nested_attributes_for :students
+
   validates :name, presence: true
 
   # add student to students via student_id sent through params

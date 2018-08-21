@@ -1,12 +1,16 @@
 class SemestersController < ApplicationController
-  before_action :authenticate_user!, :authorize_teacher!
+  before_action :authenticate_person!, :authorize_teacher!
   before_action :set_course # , only: [:index, :new, :create, :show, :edit]
   before_action :set_semester, only: [:edit, :update, :destroy]
   after_action :verify_authorized
 
   # GET /semesters
   def index
-    @semesters = @course.semesters
+    if current_student
+      @semesters = current_student.semesters
+    elsif current_user
+      @semesters = @course.semesters
+    end
   end
 
   # GET /semesters/1
@@ -75,6 +79,10 @@ class SemestersController < ApplicationController
   end
 
   private
+    def pundit_user
+      current_person
+    end
+
     def set_course
       @course = Course.find params[:course_id]
     end
@@ -86,6 +94,7 @@ class SemestersController < ApplicationController
     # Only allow a trusted parameter "white list" through.
     def semester_params
       params.require(:semester).permit(
+        :teacher_id, :teacher_assistant_id, :director_id,
         :name, :active, :add_student, :remove_student, student_ids: [],
         students_attributes: [
           :id, attendances_attributes: [
