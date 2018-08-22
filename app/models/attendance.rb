@@ -35,8 +35,8 @@ class Attendance < ApplicationRecord
   end
 
   def email_wait_time
-    # Date.tomorrow + 8.hours
-    Time.now + 1.minute
+    Date.tomorrow + 8.hours
+    # Time.now + 1.minute
   end
 
   private
