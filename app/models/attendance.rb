@@ -22,17 +22,17 @@ class Attendance < ApplicationRecord
   end
 
   def email_director
-    AbsenceMailer.director(semester.director_id)
+    AbsenceMailer.director(id)
                  .deliver_later wait_until: email_wait_time
   end
 
   def email_student
-    AbsenceMailer.student(student_id)
+    AbsenceMailer.student(id)
                  .deliver_later wait_unitl: email_wait_time
   end
 
   def email_teacher_assistant
-    AbsenceMailer.teacher_assistant(semester.teacher_assistant_id)
+    AbsenceMailer.teacher_assistant(id)
                  .deliver_later wait_until: email_wait_time
   end
 
