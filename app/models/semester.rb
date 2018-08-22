@@ -10,7 +10,7 @@ class Semester < ApplicationRecord
 
   accepts_nested_attributes_for :students
 
-  validates :name, presence: true
+  validates_presence_of :course, :name
 
   # add student to students via student_id sent through params
   def add_student=(student_id)

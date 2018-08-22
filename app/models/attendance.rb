@@ -2,7 +2,7 @@ class Attendance < ApplicationRecord
   belongs_to :semester
   belongs_to :student
 
-  validates_presence_of :date
+  validates_presence_of :date, :semester
 
   after_create :send_emails
 
@@ -54,9 +54,9 @@ class Attendance < ApplicationRecord
 
     # if the absence was consecutive?
     if consecutive?
-      # email_teacher_assistant
+      email_teacher_assistant
     else
-      # email_director
+      email_director
     end
   end
 end

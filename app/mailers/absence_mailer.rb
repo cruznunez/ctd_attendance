@@ -1,35 +1,30 @@
 class AbsenceMailer < ApplicationMailer
+  def student(attendance_id)
+    @attendance = Attendance.find attendance_id
+    @student = @attendance.student
 
-  # Subject can be set in your I18n file at config/locales/en.yml
-  # with the following lookup:
-  #
-  #   en.absence_mailer.student.subject
-  #
-  def student
-    @greeting = "Hi"
-
-    mail to: "to@example.org"
+    mail to: @student.email, subject: '[Alert] Absence'
   end
 
-  # Subject can be set in your I18n file at config/locales/en.yml
-  # with the following lookup:
-  #
-  #   en.absence_mailer.teacher_assistant.subject
-  #
-  def teacher_assistant
-    @greeting = "Hi"
+  def teacher_assistant(attendance_id)
+    @attendance = Attendance.find attendance_id
+    @student = @attendance.student
+    @semester = @attendance.semester
+    @teacher_assistant = @semester.teacher_assistant
 
-    mail to: "to@example.org"
+    return unless @teacher_assistant
+
+    mail to: @teacher_assistant.email, subject: '[Alert] Student Absent'
   end
 
-  # Subject can be set in your I18n file at config/locales/en.yml
-  # with the following lookup:
-  #
-  #   en.absence_mailer.director.subject
-  #
-  def director
-    @greeting = "Hi"
+  def director(attendance_id)
+    @attendance = Attendance.find attendance_id
+    @student = @attendance.student
+    @semester = @attendance.semester
+    @director = @semester.director
 
-    mail to: "to@example.org"
+    return unless @director
+
+    mail to: @director.email, subject: '[Alert] Student Absent'
   end
 end

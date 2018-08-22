@@ -201,5 +201,21 @@ describe Attendance, type: :model do
         assert a2.save
       end
     end
+
+    describe ':semester_id' do
+      it 'presence: true' do
+        a1 = build :attendance, semester: nil
+        a2 = build :attendance, semester: @semester
+
+        a1.should_not be_valid
+        a2.should be_valid
+
+        a1.errors.to_a.should eq ["Semester can't be blank"]
+        a2.errors.to_a.should eq []
+
+        refute a1.save
+        assert a2.save
+      end
+    end
   end
 end

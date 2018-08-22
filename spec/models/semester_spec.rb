@@ -54,5 +54,36 @@ describe Semester, type: :model do
   end
 
   context 'Validations' do
+    describe ':course_id' do
+      it 'presence: true' do
+        s1 = build :semester, course: nil
+        s2 = build :semester, course: @course
+
+        s1.should_not be_valid
+        s2.should be_valid
+
+        s1.errors.to_a.should eq ["Course can't be blank"]
+        s2.errors.to_a.should eq []
+
+        refute s1.save
+        assert s2.save
+      end
+    end
+
+    describe ':name' do
+      it 'presence: true' do
+        s1 = build :semester, name: nil
+        s2 = build :semester, name: 'my string'
+
+        s1.should_not be_valid
+        s2.should be_valid
+
+        s1.errors.to_a.should eq ["Name can't be blank"]
+        s2.errors.to_a.should eq []
+
+        refute s1.save
+        assert s2.save
+      end
+    end
   end
 end
