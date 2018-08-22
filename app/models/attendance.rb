@@ -54,9 +54,9 @@ class Attendance < ApplicationRecord
 
     # if the absence was consecutive?
     if consecutive?
-      email_teacher_assistant
-    else
       email_director
+    else
+      email_teacher_assistant
     end
   end
 end
