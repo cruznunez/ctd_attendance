@@ -27,7 +27,7 @@ RSpec.describe AbsenceMailer, type: :mailer do
       end
 
       it 'renders message' do
-        html.should match "You are receiving this email because we noticed that you were not marked present at yesterday's class. Please let us know if we did this incorrect, if there is anything going on in your life, or if there is anything we can do to help."
+        html.should match "You are receiving this email because we noticed that you were marked absent at yesterday's class. Please let us know if this is incorrect, if there is anything going on in your life, or if there is anything we can do to help."
       end
     end
 
@@ -39,7 +39,7 @@ RSpec.describe AbsenceMailer, type: :mailer do
       end
 
       it 'renders message' do
-        plain.should match "You are receiving this email because we noticed that you were not marked present at yesterday's class. Please let us know if we did this incorrect, if there is anything going on in your life, or if there is anything we can do to help."
+        plain.should match "You are receiving this email because we noticed that you were marked absent at yesterday's class. Please let us know if this is incorrect, if there is anything going on in your life, or if there is anything we can do to help."
       end
     end
   end
