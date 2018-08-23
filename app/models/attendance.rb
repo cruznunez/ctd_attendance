@@ -4,7 +4,7 @@ class Attendance < ApplicationRecord
 
   validates_presence_of :date, :semester
 
-  after_create :send_emails
+  # after_create :send_emails
 
   def absent?
     !present?
@@ -35,8 +35,22 @@ class Attendance < ApplicationRecord
   end
 
   def email_wait_time
-    Date.tomorrow + 8.hours
-    # Time.now + 1.minute
+    # Date.tomorrow + 8.hours
+    Time.now + 1.minute
+  end
+
+  def job_exists?
+    sid = semester_id
+    d8 = date.to_s
+
+    if Rails.env.test?
+      enqueued_jobs.any? do |x|
+        x[:args].include?(sid) && x[:args].include?(d8)
+      end
+    else
+      Delayed::Job.where('handler LIKE ? AND handler LIKE ? AND handler LIKE ?',
+        "%- AbsenceJob%", "%- #{sid}%", "%- #{d8}%").any?
+    end
   end
 
   private
@@ -44,17 +58,23 @@ class Attendance < ApplicationRecord
   # if the date of the attendance matches today's date
   # if the student was absent, send them an email and the Teacher Assistant
   # if the absence was consecutive, send them an email and the Director
+  # don't schedule job if already exists
   def send_emails
-    return unless absent? && date == Date.today
+    return if job_exists?
 
-    # always send email to student
-    email_student
+    AbsenceJob.set(wait_until: email_wait_time)
+              .perform_later(semester_id, date.to_s)
 
-    # if the absence was consecutive?
-    if consecutive?
-      email_director
-    else
-      email_teacher_assistant
-    end
+    # return unless absent? && date == Date.today
+    #
+    # # always send email to student
+    # email_student
+    #
+    # # if the absence was consecutive?
+    # if consecutive?
+    #   email_director
+    # else
+    #   email_teacher_assistant
+    # end
   end
 end

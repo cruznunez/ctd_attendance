@@ -45,7 +45,7 @@ RSpec.describe AbsenceMailer, type: :mailer do
   end
 
   describe 'teacher_assistant' do
-    let(:mail) { AbsenceMailer.teacher_assistant @attendance.id }
+    let(:mail) { AbsenceMailer.teacher_assistant @semester.id, [@attendance.id] }
 
     context 'no teacher assistant' do
       it 'does nothing' do
@@ -77,7 +77,7 @@ RSpec.describe AbsenceMailer, type: :mailer do
         end
 
         it "renders the body" do
-          html.should match "You are receiving this email because #{@student.name}, a student in #{@course.name} - #{@semester.name}, was absent in yesterday's class. You must do something about this. Do it."
+          html.should match "You are receiving this email because 1 student in #{@course.name} - #{@semester.name} was absent in yesterday's class. You must do something about this. Do it."
         end
       end
 
@@ -89,15 +89,14 @@ RSpec.describe AbsenceMailer, type: :mailer do
         end
 
         it 'renders the body' do
-          plain.should match "You are receiving this email because #{@student.name}, a student in #{@course.name} - #{@semester.name}, was absent in yesterday's class. You must do something about this. Do it."
+          plain.should match "You are receiving this email because 1 student in #{@course.name} - #{@semester.name} was absent in yesterday's class. You must do something about this. Do it."
         end
       end
     end
-
   end
 
   describe 'director' do
-    let(:mail) { AbsenceMailer.director @attendance.id }
+    let(:mail) { AbsenceMailer.director @semester.id, [@attendance.id] }
 
     context 'no director' do
       it 'does nothing' do
@@ -129,22 +128,21 @@ RSpec.describe AbsenceMailer, type: :mailer do
         end
 
         it "renders the body" do
-          html.should match "You are receiving this email because #{@student.name}, a student in #{@course.name} - #{@semester.name}, was absent in yesterday's class. You must do something about this. Do it."
+          html.should match "You are receiving this email because 1 student in #{@course.name} - #{@semester.name} was absent in yesterday's class. You must do something about this. Do it."
         end
       end
 
       context 'plain' do
         let(:plain) { get_message_part mail, /plain/ }
 
-        it 'renders Directro' do
+        it 'renders Director' do
           plain.should match 'Hello Director'
         end
 
         it 'renders the body' do
-          plain.should match "You are receiving this email because #{@student.name}, a student in #{@course.name} - #{@semester.name}, was absent in yesterday's class. You must do something about this. Do it."
+          plain.should match "You are receiving this email because 1 student in #{@course.name} - #{@semester.name} was absent in yesterday's class. You must do something about this. Do it."
         end
       end
     end
-
   end
 end

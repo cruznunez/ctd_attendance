@@ -1,5 +1,15 @@
 <h1>Hello Director,</h1>
 
 <p>
-  You are receiving this email because <%= @student.name %>, a student in <%= @semester.course.name %> - <%= @semester.name %>, was absent in yesterday's class. You must do something about this. Do it.
+  You are receiving this email because <%= pluralize @students.size, 'student' %> in <%= @semester.course.name %> - <%= @semester.name %> <%= @students.size == 1 ? 'was' : 'were' %> absent in yesterday's class. You must do something about this. Do it.
 </p>
+
+<p>
+  The students are:
+</p>
+
+<ul>
+  <% @students.each do |student| %>
+    <li><%= student.name %></li>
+  <% end %>
+</ul>

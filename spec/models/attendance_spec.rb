@@ -183,6 +183,32 @@ describe Attendance, type: :model do
         end.to have_enqueued_job.on_queue 'mailers'
       end
     end
+
+    describe ':send_emails' do
+      before do
+        @attendance = build :attendance, present: false
+      end
+
+      context 'no job scheduled yet' do
+        it 'creates job' do
+          expect do
+            @attendance.send :send_emails
+          end.to change(enqueued_jobs, :size).by 1
+        end
+      end
+
+      context 'job scheduled already' do
+        before do
+          @attendance.send :send_emails
+        end
+
+        it 'does not create job' do
+          expect do
+            @attendance.send :send_emails
+          end.to_not change enqueued_jobs, :size
+        end
+      end
+    end
   end
 
   context 'Validations' do
