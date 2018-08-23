@@ -4,7 +4,7 @@ class Attendance < ApplicationRecord
 
   validates_presence_of :date, :semester
 
-  # after_create :send_emails
+  after_save :send_emails
 
   def absent?
     !present?
@@ -60,6 +60,7 @@ class Attendance < ApplicationRecord
   # if the absence was consecutive, send them an email and the Director
   # don't schedule job if already exists
   def send_emails
+    # p "job_exists?: #{job_exists?}"
     return if job_exists?
 
     AbsenceJob.set(wait_until: email_wait_time)

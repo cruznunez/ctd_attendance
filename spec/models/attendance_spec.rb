@@ -186,13 +186,16 @@ describe Attendance, type: :model do
 
     describe ':send_emails' do
       before do
+        # make sure there are no jobs before this test group starts
+        enqueued_jobs.clear
         @attendance = build :attendance, present: false
       end
 
       context 'no job scheduled yet' do
         it 'creates job' do
           expect do
-            @attendance.send :send_emails
+            # @attendance.send :send_emails
+            @attendance.save
           end.to change(enqueued_jobs, :size).by 1
         end
       end
