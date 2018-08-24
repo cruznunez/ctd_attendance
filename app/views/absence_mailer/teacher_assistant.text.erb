@@ -7,3 +7,5 @@ The students are:
 <% @students.each do |student| %>
   - <%= student.name %>
 <% end %>
+
+Their emails are: <%= @students.map(&:email).join(', ') %>

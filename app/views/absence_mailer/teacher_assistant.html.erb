@@ -13,3 +13,7 @@
     <li><%= student.name %></li>
   <% end %>
 </ul>
+
+<p>
+  Their emails are: <%= @students.map(&:email).join(', ') %>
+</p>

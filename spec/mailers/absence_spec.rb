@@ -1,4 +1,5 @@
 require "rails_helper"
+include ActiveJob::TestHelper
 
 RSpec.describe AbsenceMailer, type: :mailer do
   before do
@@ -22,12 +23,17 @@ RSpec.describe AbsenceMailer, type: :mailer do
     context 'html' do
       let(:html) { get_message_part mail, /html/ }
 
-      it 'renders student name' do
-        html.should match @student.name
+      it 'renders salutation and student name' do
+        html.should match "Hello #{@student.name}"
       end
 
       it 'renders message' do
-        html.should match "You are receiving this email because we noticed that you were marked absent at yesterday's class. Please let us know if this is incorrect, if there is anything going on in your life, or if there is anything we can do to help."
+        html.should match "We missed you in class yesterday! If you are receiving this email in error and you were in class yesterday, please contact your instructor. Otherwise, we hope to see you next time!"
+      end
+
+      it 'renders closing' do
+        html.should match 'Best,'
+        html.should match 'Code The Dream'
       end
     end
 
@@ -39,7 +45,7 @@ RSpec.describe AbsenceMailer, type: :mailer do
       end
 
       it 'renders message' do
-        plain.should match "You are receiving this email because we noticed that you were marked absent at yesterday's class. Please let us know if this is incorrect, if there is anything going on in your life, or if there is anything we can do to help."
+        plain.should match "We missed you in class yesterday! If you are receiving this email in error and you were in class yesterday, please contact your instructor. Otherwise, we hope to see you next time!"
       end
     end
   end
@@ -73,11 +79,20 @@ RSpec.describe AbsenceMailer, type: :mailer do
         let(:html) { get_message_part mail, /html/ }
 
         it 'renders Teacher Assistant' do
-          html.should match 'Hello Teacher Assistant'
+          html.should match 'Hello Teacher Assistant,'
         end
 
         it "renders the body" do
           html.should match "You are receiving this email because 1 student in #{@course.name} - #{@semester.name} was absent in yesterday's class. You must do something about this. Do it."
+        end
+
+        it 'renders the list of students' do
+          html.should match 'The students are:'
+          html.should match "<li>#{@student.name}</li>"
+        end
+
+        it 'renders student emails' do
+          html.should match "Their emails are: #{@student.email}"
         end
       end
 
@@ -90,6 +105,15 @@ RSpec.describe AbsenceMailer, type: :mailer do
 
         it 'renders the body' do
           plain.should match "You are receiving this email because 1 student in #{@course.name} - #{@semester.name} was absent in yesterday's class. You must do something about this. Do it."
+        end
+
+        it 'renders the list of students' do
+          plain.should match 'The students are:'
+          plain.should match "- #{@student.name}"
+        end
+
+        it 'renders student emails' do
+          plain.should match "Their emails are: #{@student.email}"
         end
       end
     end
@@ -124,11 +148,20 @@ RSpec.describe AbsenceMailer, type: :mailer do
         let(:html) { get_message_part mail, /html/ }
 
         it 'renders Teacher Assistant' do
-          html.should match 'Hello Director'
+          html.should match 'Hello Director,'
         end
 
         it "renders the body" do
           html.should match "You are receiving this email because 1 student in #{@course.name} - #{@semester.name} was absent in yesterday's class. You must do something about this. Do it."
+        end
+
+        it 'renders the list of students' do
+          html.should match 'The students are:'
+          html.should match "<li>#{@student.name}</li>"
+        end
+
+        it 'renders student emails' do
+          html.should match "Their emails are: #{@student.email}"
         end
       end
 
@@ -141,6 +174,15 @@ RSpec.describe AbsenceMailer, type: :mailer do
 
         it 'renders the body' do
           plain.should match "You are receiving this email because 1 student in #{@course.name} - #{@semester.name} was absent in yesterday's class. You must do something about this. Do it."
+        end
+
+        it 'renders the list of students' do
+          plain.should match 'The students are:'
+          plain.should match "- #{@student.name}"
+        end
+
+        it 'renders student emails' do
+          plain.should match "Their emails are: #{@student.email}"
         end
       end
     end
