@@ -1,16 +1,16 @@
 <%= form_for [semester.course, semester] do |f| %>
   <p class="card-title">Title</p>
 
-  <div class="card field">
+  <div class="card field mb">
     <span>
       <%= f.text_field :name, autocomplete: :off, class: 'm0', required: true %>
       <%= f.label :name %>
     </span>
+  </div>
 
-    <span>
-      <%= f.check_box :active %>
-      <%= f.label :active %>
-    </span>
+  <div class="toggle">
+    <%= f.check_box :active %>
+    <%= f.label :active %>
   </div>
 
   <p class="card-title">Staff</p>

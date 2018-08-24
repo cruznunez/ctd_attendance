@@ -101,6 +101,46 @@ $z: $focus-color;
   }
 }
 
+.toggle {
+  $green: #0F9D58;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  display: flex;
+  margin-bottom: 1em;
+
+  input {
+    display: none;
+    & + label {
+      background: white;
+      &::after {
+        content: '\f204';
+        font: 1.4em FontAwesome;
+        float: right;
+      }
+    }
+    &:checked + label {
+      color: $green;
+      &::after {
+        content: '\f205';
+      }
+    }
+  }
+
+  label {
+    color: #777;
+    cursor: pointer;
+    font-weight: 400;
+    margin: 0; // anti-bootstrap measure
+    padding: 1em;
+    width: 100%;
+
+    @include immobile {
+      &:hover {
+        background: #F2F2F2;
+      }
+    }
+  }
+}
+
 // image file field
 #profile-img-file-field {
   cursor: pointer;
