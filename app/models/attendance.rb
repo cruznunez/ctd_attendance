@@ -49,7 +49,7 @@ class Attendance < ApplicationRecord
       end
     else
       Delayed::Job.where('handler LIKE ? AND handler LIKE ? AND handler LIKE ?',
-        "%- AbsenceJob%", "%- #{sid}%", "%- #{d8}%").any?
+        "%job_class: AbsenceJob%", "%- #{sid}%", "%- #{d8}%").any?
     end
   end
 
