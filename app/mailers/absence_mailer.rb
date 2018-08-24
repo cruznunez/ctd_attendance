@@ -14,6 +14,8 @@ class AbsenceMailer < ApplicationMailer
 
     attendances = Attendance.includes(:student).where id: attendance_ids
 
+    return if attendances.empty?
+
     @students = attendances.map(&:student)
 
     mail to: @teacher_assistant.email, subject: '[Alert] Student Absent'
@@ -26,6 +28,8 @@ class AbsenceMailer < ApplicationMailer
     return unless @director
 
     attendances = Attendance.includes(:student).where id: attendance_ids
+
+    return if attendances.empty?
 
     @students = attendances.map(&:student)
 

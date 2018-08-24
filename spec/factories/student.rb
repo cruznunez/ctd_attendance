@@ -3,14 +3,14 @@ FactoryBot.define do
   factory :student do
     first_name 'John'
     last_name 'Doe'
-    email 'a@a.a'
+    email 'a@student.com'
 
     trait 2 do
-      email 'b@b.b'
+      email 'b@student.com'
     end
 
     trait 3 do
-      email 'c@c.c'
+      email 'c@student.com'
     end
   end
 end
