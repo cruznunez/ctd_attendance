@@ -11,36 +11,46 @@
   </p>
 
   <div class="card">
-    <div class="flex-container justify-between">
+    <div class="flex justify-between">
       <span>Teacher:</span>
       <%= @semester.teacher&.email || '<i>none</i>'.html_safe %>
     </div>
-    <div class="flex-container justify-between">
+    <div class="flex justify-between">
       <span>Teacher Assistant:</span>
       <%= @semester.teacher_assistant&.email || '<i>none</i>'.html_safe %>
     </div>
-    <div class="flex-container justify-between">
+    <div class="flex justify-between">
       <span>Director:</span>
       <%= @semester.director&.email || '<i>none</i>'.html_safe %>
     </div>
   </div>
 
   <p class="card-title">
-    <%= @semester.active ? 'Active' : 'Inactive' %>
+    Lessons
   </p>
 
-  <%= link_to attendance_course_semester_path(@course, @semester), class: 'clickable-row flex-container justify-between' do %>
-    <span>Take Attendance</span>
+  <%= link_to [@course, @semester, :lessons], class: 'clickable-row flex justify-between' do %>
+    View Lessons
     <i class="fa fa-arrow-right fa-lg" aria-hidden="true" style="line-height: 1;"></i>
   <% end %>
 
-  <div class="flex-container justify-between card-title">
+  <p class="card-title">
+    <%= @semester.active ? 'Active' : 'Inactive' %>
+  </p>
+
+
+  <%= link_to attendance_course_semester_path(@course, @semester), class: 'clickable-row flex justify-between' do %>
+    Take Attendance
+    <i class="fa fa-arrow-right fa-lg" aria-hidden="true" style="line-height: 1;"></i>
+  <% end %>
+
+  <div class="flex justify-between card-title">
     <p><%= pluralize @semester.students.size, 'student' %></p>
 
     <p>Attendance</p>
   </div>
 
-  <div class="flex-container flex-column">
+  <div class="flex flex-column">
     <% @semester.students.each do |student| %>
       <%= student_attendance student, @semester.attendances %>
     <% end %>

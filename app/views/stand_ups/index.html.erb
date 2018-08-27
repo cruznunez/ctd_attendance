@@ -1,13 +1,13 @@
 <h3 class="card-title"><%= @project.name %> | Stand Ups</h3>
 
-<%= link_to new_project_stand_up_path, class: 'clickable-row flex-container justify-between' do %>
+<%= link_to new_project_stand_up_path, class: 'clickable-row flex justify-between' do %>
   <span>Stand Up</span>
   <i class="fa fa-arrow-right fa-lg" aria-hidden="true" style="line-height: 1;"></i>
 <% end %>
 
 <h4 class="card-title">Calendar</h4>
 
-<div id="calendars" class="flex-container justify-between wrap">
+<div id="calendars" class="flex justify-between wrap">
   <% @stand_ups.sort_by(&:date).group_by { |x| [x.date.year, x.date.month] }.each do |month, a| %>
     <%= project_calendar month, a %>
   <% end %>

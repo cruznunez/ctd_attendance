@@ -15,6 +15,12 @@ Rails.application.routes.draw do
       member do
         get :attendance
       end
+
+      resources :lessons do
+        member do
+          get :slides
+        end
+      end
     end
   end
 

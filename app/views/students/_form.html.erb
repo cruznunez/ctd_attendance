@@ -5,7 +5,7 @@
       <%= content_tag :div, nil, id: 'img-preview', style: "background-image: url(#{student.image.url(:thumb)})" %>
     </div>
 
-    <div class="flex-container">
+    <div class="flex">
       <span class="flex-twin">
         <%= f.text_field :first_name, autocomplete: :off, autofocus: student.new_record?, class: 'wide' %>
         <%= f.label :first_name %>
@@ -17,7 +17,7 @@
       </span>
     </div>
 
-    <div class="flex-container">
+    <div class="flex">
       <span class="flex-twin">
         <%= f.text_field :slack_name, autocomplete: :off, class: 'wide' %>
         <%= f.label :slack_name %>
@@ -29,7 +29,7 @@
       </span>
     </div>
 
-    <div class="flex-container">
+    <div class="flex">
       <span class="flex-twin">
         <%= f.email_field :email, class: 'wide', required: true %>
         <%= f.label :email %>

@@ -1,4 +1,4 @@
-<div class="flex-container flex-column">
+<div class="flex flex-column">
   <% @semesters.each do |semester| %>
     <%= link_to semester.name, course_semester_path(semester.course_id, semester), class: 'clickable-row' %>
   <% end %>

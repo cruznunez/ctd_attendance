@@ -28,7 +28,7 @@ module StudentsHelper
     percent = (present.size/total.size.to_f * 100).round rescue 0
     link_to student, class: 'attendance', style: "width: #{percent}%" do
       <<~HTML.html_safe
-        <span>#{student.first_name}</span>
+        #{student.first_name}
         <span>#{percent}%</span>
       HTML
     end

@@ -12,7 +12,7 @@
 
 <h4 class="card-title">Attendance</h4>
 
-<div class="flex-container flex-column">
+<div class="flex flex-column">
   <% @semesters.each do |k, v| %>
     <%= semester_attendance k, v %>
   <% end %>
@@ -21,7 +21,7 @@
 <% @semesters.each do |semester, attendances| %>
   <h4 class="card-title"><%= semester.course.name %> | <%= semester.name %></h4>
 
-  <div class="flex-container justify-between wrap">
+  <div class="flex justify-between wrap">
     <% attendances.sort_by(&:date).each do |a| %>
       <div class="day <%= 'present' if a.present %>">
         <%= a.date.strftime("%a, %b %e") %>

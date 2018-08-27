@@ -1,11 +1,11 @@
 <h2 class="card-title"><%= @project.name %></h2>
 
-<%= link_to project_stand_ups_path(@project), class: 'clickable-row flex-container justify-between' do %>
+<%= link_to project_stand_ups_path(@project), class: 'clickable-row flex justify-between' do %>
   <span>Stand Ups</span>
   <i class="fa fa-arrow-right fa-lg" aria-hidden="true" style="line-height: 1;"></i>
 <% end %>
 
-<%= link_to project_code_reviews_path(@project), class: 'clickable-row flex-container justify-between' do %>
+<%= link_to project_code_reviews_path(@project), class: 'clickable-row flex justify-between' do %>
   <span>Code Reviews</span>
   <i class="fa fa-arrow-right fa-lg" aria-hidden="true" style="line-height: 1;"></i>
 <% end %>
@@ -32,7 +32,7 @@
 
 <h4 class="card-title"><%= pluralize @project.students.size, 'student' %></h4>
 
-<div class="flex-container flex-column">
+<div class="flex flex-column">
   <% @project.students.each do |student| %>
     <%= link_to student.first_name, student, class: 'clickable-row' %>
   <% end %>

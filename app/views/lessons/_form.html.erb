@@ -1,0 +1,54 @@
+<%= form_for [@course, @semester, lesson] do |f| %>
+  <div class="toggle">
+    <%= f.check_box :visible %>
+    <%= f.label :visible %>
+  </div>
+
+  <div class="card field">
+    <div>
+      <span>
+        <%= f.text_field :title %>
+        <%= f.label :title %>
+      </span>
+    </div>
+
+    <span>
+      <%= f.date_select :date %>
+      <%= f.label :date %>
+    </span>
+
+    <div class="mb">
+      <span class="wide">
+        <%= f.text_area :notes %>
+
+        <div class="resize-handle"></div>
+
+        <%= f.label :notes %>
+      </span>
+    </div>
+
+    <div class="mb">
+      <span class="wide">
+        <%= f.text_area :homework %>
+
+        <div class="resize-handle"></div>
+
+        <%= f.label :homework %>
+      </span>
+    </div>
+
+    <div>
+      <span class="wide">
+        <%= f.text_area :slides %>
+
+        <div class="resize-handle"></div>
+
+        <%= f.label :slides %>
+      </span>
+    </div>
+  </div>
+
+  <%= f.submit style: 'display: none;' %>
+
+  <%= submit_button f %>
+<% end %>

@@ -7,6 +7,7 @@ class Semester < ApplicationRecord
   has_and_belongs_to_many :students
 
   has_many :attendances, dependent: :destroy
+  has_many :lessons, dependent: :destroy
 
   accepts_nested_attributes_for :students
 

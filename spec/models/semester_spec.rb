@@ -24,6 +24,27 @@ describe Semester, type: :model do
       end
     end
 
+    describe 'Lesson' do
+      it 'has_many :lessons' do
+        l1 = create :lesson
+        @semester.lessons.should eq [l1]
+
+        l2 = create :lesson
+        @semester.reload
+        @semester.lessons.should match_array [l1, l2]
+      end
+
+      it 'dependent: :destroy' do
+        expect do
+          l1 = create :lesson
+        end.to change(Lesson, :count).by 1
+
+        expect do
+          @semester.destroy
+        end.to change(Lesson, :count).by -1
+      end
+    end
+
     describe 'Teacher' do
       it 'belongs_to :teacher' do
         semester = build :semester, teacher: @user

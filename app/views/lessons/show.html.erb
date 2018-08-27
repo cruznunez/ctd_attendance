@@ -1,0 +1,50 @@
+<p class="card-title">
+  Title
+</p>
+
+<p class="card">
+  <%= @lesson.title %>
+</p>
+
+<p class="card-title">
+  Date
+</p>
+
+<p class="card">
+  <%= just_date @lesson.date %>
+</p>
+
+<p class="card-title">
+  Visible
+</p>
+
+<p class="card">
+  <%= @lesson.visible %>
+</p>
+
+<p class="card-title">
+  Notes
+</p>
+
+<p class="card">
+  <%= @lesson.notes %>
+</p>
+
+<p class="card-title">
+  Homework
+</p>
+
+<p class="card">
+  <%= @lesson.homework || '<i>missing</i>'.html_safe %>
+</p>
+
+<p class="card-title">
+  Slides
+</p>
+
+<p class="card">
+  <%= @lesson.slides %>
+</p>
+
+<%= edit_button [:edit, @course, @semester, @lesson] %>
+<%= back_button [@course, @semester, :lessons] %>

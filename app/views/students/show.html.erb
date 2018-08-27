@@ -6,23 +6,23 @@
     <summary class="card-title mb">Tracking info</summary>
 
     <div class="card">
-      <div class="flex-container justify-between">
+      <div class="flex justify-between">
         <span>Sign in count:</span>
         <%= @student.sign_in_count || '<i>missing</i>'.html_safe %>
       </div>
-      <div class="flex-container justify-between">
+      <div class="flex justify-between">
         <span>Current sign in at:</span>
         <%= full_date @student.current_sign_in_at %>
       </div>
-      <div class="flex-container justify-between">
+      <div class="flex justify-between">
         <span>Last sign in at:</span>
         <%= full_date @student.last_sign_in_at %>
       </div>
-      <div class="flex-container justify-between">
+      <div class="flex justify-between">
         <span>Current sign in IP:</span>
         <%= @student.current_sign_in_ip || '<i>missing</i>'.html_safe %>
       </div>
-      <div class="flex-container justify-between">
+      <div class="flex justify-between">
         <span>Last sign in IP:</span>
         <%= @student.last_sign_in_ip || '<i>missing</i>'.html_safe %>
       </div>
@@ -35,7 +35,7 @@
 <% if @student.slack_name %>
   <% if @student.slack_id %>
     <%= link_to "slack://user?team=T07EHJ738&id=#{@student.slack_id}" do %>
-      <p class="card clickable-row flex-container justify-between">
+      <p class="card clickable-row flex justify-between">
         <%= @student.slack_name %>
         <i class="fa fa-slack fa-lg" aria-hidden="true" style="line-height: 1;"></i>
       </p>
@@ -54,7 +54,7 @@
     <summary class="card-title mb">Email Confirmation</summary>
 
     <div class="card">
-      <div class="flex-container justify-between">
+      <div class="flex justify-between">
         <span>Confirmation token:</span>
         <% if @student.confirmation_token %>
           <%= link_to @student.confirmation_token, student_confirmation_path(confirmation_token: @student.confirmation_token) %>
@@ -62,15 +62,15 @@
           <i>missing</i>
         <% end %>
       </div>
-      <div class="flex-container justify-between">
+      <div class="flex justify-between">
         <span>Confirmed at:</span>
         <%= full_date @student.confirmed_at %>
       </div>
-      <div class="flex-container justify-between">
+      <div class="flex justify-between">
         <span>Confirmation sent at:</span>
         <%= full_date @student.confirmation_sent_at %>
       </div>
-      <div class="flex-container justify-between">
+      <div class="flex justify-between">
         <span>Unconfirmed email:</span>
         <%= @student.unconfirmed_email || '<i>missing</i>'.html_safe %>
       </div>
@@ -85,7 +85,7 @@
 
 <h4 class="card-title">Attendance</h4>
 
-<div class="flex-container flex-column">
+<div class="flex flex-column">
   <% @semesters.each do |k, v| %>
     <%= semester_attendance k, v %>
   <% end %>
@@ -94,7 +94,7 @@
 <% @semesters.each do |semester, attendances| %>
   <h4 class="card-title"><%= semester.course.name %> | <%= semester.name %></h4>
 
-  <div id="calendars" class="flex-container justify-between wrap">
+  <div id="calendars" class="flex justify-between wrap">
     <% attendances.sort_by(&:date).group_by { |x| [x.date.year, x.date.month] }.each do |month, a| %>
       <%= attendance_calendar month, a %>
     <% end %>
@@ -103,7 +103,7 @@
 
 <h4 class="card-title">Projects</h4>
 
-<div class="flex-container flex-column">
+<div class="flex flex-column">
   <% @student.projects.each do |project| %>
     <%= link_to project.name, project, class: 'clickable-row' %>
   <% end %>

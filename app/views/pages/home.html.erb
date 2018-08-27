@@ -1,4 +1,4 @@
-<div class="flex-container flex-column">
+<div class="flex flex-column">
   <%= link_to 'Courses', courses_path, class: 'clickable-row' %>
   <%= link_to 'Projects', projects_path, class: 'clickable-row' if policy(:project).index? %>
   <%= link_to 'Students', students_path, class: 'clickable-row' if policy(:student).index? %>
