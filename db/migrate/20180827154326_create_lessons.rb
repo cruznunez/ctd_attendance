@@ -3,12 +3,13 @@ class CreateLessons < ActiveRecord::Migration[5.0]
     create_table :lessons do |t|
       t.references :semester
 
-      t.string :title
       t.date :date
+      t.string :title
       t.boolean :visible
       t.text :notes
       t.text :homework
       t.text :slides
+      t.string :video_url
 
       t.timestamps
     end

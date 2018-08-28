@@ -39,5 +39,21 @@ RSpec.describe Lesson, type: :model do
         assert l2.save
       end
     end
+
+    describe ':title' do
+      it 'presence: true' do        
+        l1 = build :lesson, title: nil
+        l2 = build :lesson, title: 'a'
+
+        l1.should_not be_valid
+        l2.should be_valid
+
+        l1.errors.to_a.should eq ["Title can't be blank"]
+        l2.errors.to_a.should eq []
+
+        refute l1.save
+        assert l2.save
+      end
+    end
   end
 end

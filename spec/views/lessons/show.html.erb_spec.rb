@@ -1,14 +1,13 @@
 require 'rails_helper'
+include Pundit
 
 RSpec.describe "lessons/show", type: :view do
-  before(:each) do
-    @lesson = assign(:lesson, Lesson.create!(
-      :title => "Title",
-      :visible => false,
-      :notes => "MyText",
-      :homework => "MyText",
-      :slides => "MyText"
-    ))
+  before do
+    @course = create :course
+    @semester = create :semester
+    @lesson = assign :lesson, create(:lesson)
+    @teacher = create :user
+    sign_in @teacher
   end
 
   it "renders attributes in <p>" do

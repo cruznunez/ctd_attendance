@@ -1,20 +1,16 @@
 require 'rails_helper'
 
 RSpec.describe "lessons/edit", type: :view do
-  before(:each) do
-    @lesson = assign(:lesson, Lesson.create!(
-      :title => "MyString",
-      :visible => false,
-      :notes => "MyText",
-      :homework => "MyText",
-      :slides => "MyText"
-    ))
+  before do
+    @course = create :course
+    @semester = create :semester
+    @lesson = assign :lesson, create(:lesson)
   end
 
   it "renders the edit lesson form" do
     render
 
-    assert_select "form[action=?][method=?]", lesson_path(@lesson), "post" do
+    assert_select "form[action=?][method=?]", course_semester_lesson_path(@course, @semester, @lesson), "post" do
 
       assert_select "input#lesson_title[name=?]", "lesson[title]"
 

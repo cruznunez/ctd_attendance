@@ -33,6 +33,7 @@ class LessonsController < ApplicationController
     if @lesson.save
       redirect_to [@course, @semester, @lesson], notice: 'Lesson added'
     else
+      alert_errors @lesson
       render :new
     end
   end
@@ -42,6 +43,7 @@ class LessonsController < ApplicationController
     if @lesson.update lesson_params
       redirect_to [@course, @semester, @lesson], notice: 'Lesson updated'
     else
+      alert_errors @lesson
       render :edit
     end
   end
@@ -49,11 +51,7 @@ class LessonsController < ApplicationController
   # DELETE /lessons/1
   def destroy
     @lesson.destroy
-
-    respond_to do |format|
-      format.html { redirect_to lessons_url, notice: 'Lesson deleted' }
-      format.json { head :no_content }
-    end
+    redirect_to [@course, @semester, :lessons], notice: 'Lesson deleted'
   end
 
   def slides

@@ -59,4 +59,13 @@ RSpec.configure do |config|
 
   # load the email helpers when testing mailer type specs
   config.include Email::Helpers, type: :mailer
+
+  # the devise test helpers allow us to use lines like sign_in @user
+  # types = %i(
+  #   controller view feature helper job mailer model policy request routing
+  # )
+
+  %i(controller view helper).each do |type|
+    config.include Devise::Test::ControllerHelpers, type: type
+  end
 end

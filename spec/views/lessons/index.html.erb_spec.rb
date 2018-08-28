@@ -1,31 +1,22 @@
 require 'rails_helper'
+include Pundit
 
 RSpec.describe "lessons/index", type: :view do
-  before(:each) do
-    assign(:lessons, [
-      Lesson.create!(
-        :title => "Title",
-        :visible => false,
-        :notes => "MyText",
-        :homework => "MyText",
-        :slides => "MyText"
-      ),
-      Lesson.create!(
-        :title => "Title",
-        :visible => false,
-        :notes => "MyText",
-        :homework => "MyText",
-        :slides => "MyText"
-      )
-    ])
+  before do
+    @course = create :course
+    @semester = create :semester
+    l1 = create :lesson
+    l2 = create :lesson
+
+    assign :lessons, [l1, l2]
   end
 
   it "renders a list of lessons" do
     render
-    assert_select "tr>td", :text => "Title".to_s, :count => 2
-    assert_select "tr>td", :text => false.to_s, :count => 2
-    assert_select "tr>td", :text => "MyText".to_s, :count => 2
-    assert_select "tr>td", :text => "MyText".to_s, :count => 2
-    assert_select "tr>td", :text => "MyText".to_s, :count => 2
+
+    within '.card' do
+      page.should match "#{Date.today.strftime('%-m/%-d')} - MyString"
+      page.should match "Slides"
+    end
   end
 end

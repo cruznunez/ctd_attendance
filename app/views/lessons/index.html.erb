@@ -19,4 +19,10 @@
   </p>
 <% end %>
 
+<% if current_user %>
+  <%= back_button [@course, @semester] %>
+<% else %>
+  <%= back_button [@course, :semesters] %>
+<% end %>
+
 <%= add_button [:new, @course, @semester, :lesson] if policy(:lesson).teacher? %>
