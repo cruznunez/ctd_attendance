@@ -25,6 +25,7 @@ gem 'paperclip', '~> 5.0.0' # image processor
 gem 'puma', '~> 3.0'
 gem 'pundit'
 gem 'rails', '~> 5.0.1'
+# gem 'rails-reveal-js', '~> 3.1'
 gem 'redcarpet' # markdown parser
 gem 'sass-rails', '~> 5.0'
 gem 'turbolinks', '~> 5'

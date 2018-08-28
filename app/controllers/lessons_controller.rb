@@ -1,15 +1,19 @@
 class LessonsController < ApplicationController
+  before_action :authenticate_person!, :authorize_person!
   before_action :set_references
-  before_action :set_lesson, only: [:show, :edit, :update, :destroy]
+  before_action :set_lesson, only: [:show, :edit, :update, :destroy, :slides]
+  after_action :verify_authorized
 
   # GET /lessons
-  # GET /lessons.json
   def index
-    @lessons = @semester.lessons
+    if current_user
+      @lessons = @semester.lessons.order(:date)
+    else
+      @lessons = @semester.lessons.where(visible: true).order(:date)
+    end
   end
 
   # GET /lessons/1
-  # GET /lessons/1.json
   def show
   end
 
@@ -23,37 +27,26 @@ class LessonsController < ApplicationController
   end
 
   # POST /lessons
-  # POST /lessons.json
   def create
     @lesson = @semester.lessons.new lesson_params
 
-    respond_to do |format|
-      if @lesson.save
-        format.html { redirect_to [@course, @semester, @lesson], notice: 'Lesson added' }
-        format.json { render :show, status: :created, location: [@course, @semester, @lesson] }
-      else
-        format.html { render :new }
-        format.json { render json: @lesson.errors, status: :unprocessable_entity }
-      end
+    if @lesson.save
+      redirect_to [@course, @semester, @lesson], notice: 'Lesson added'
+    else
+      render :new
     end
   end
 
   # PATCH/PUT /lessons/1
-  # PATCH/PUT /lessons/1.json
   def update
-    respond_to do |format|
-      if @lesson.update(lesson_params)
-        format.html { redirect_to [@course, @semester, @lesson], notice: 'Lesson updated' }
-        format.json { render :show, status: :ok, location: [@course, @semester, @lesson] }
-      else
-        format.html { render :edit }
-        format.json { render json: @lesson.errors, status: :unprocessable_entity }
-      end
+    if @lesson.update lesson_params
+      redirect_to [@course, @semester, @lesson], notice: 'Lesson updated'
+    else
+      render :edit
     end
   end
 
   # DELETE /lessons/1
-  # DELETE /lessons/1.json
   def destroy
     @lesson.destroy
 
@@ -63,20 +56,34 @@ class LessonsController < ApplicationController
     end
   end
 
+  def slides
+    render layout: false
+  end
+
   private
 
-    def set_references
-      @course = Course.find params[:course_id]
-      @semester = @course.semesters.find params[:semester_id]
-    end
+  def authorize_person!
+    authorize Lesson
+  end
 
-    # Use callbacks to share common setup or constraints between actions.
-    def set_lesson
-      @lesson = @semester.lessons.find params[:id]
-    end
+  def pundit_user
+    current_person
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def lesson_params
-      params.require(:lesson).permit(:title, :date, :visible, :notes, :homework, :slides)
-    end
+  def set_references
+    @course = Course.find params[:course_id]
+    @semester = @course.semesters.find params[:semester_id]
+  end
+
+  # Use callbacks to share common setup or constraints between actions.
+  def set_lesson
+    @lesson = @semester.lessons.find params[:id]
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def lesson_params
+    params.require(:lesson).permit(
+      :title, :date, :visible, :notes, :homework, :slides
+    )
+  end
 end

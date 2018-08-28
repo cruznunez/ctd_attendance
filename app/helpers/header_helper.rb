@@ -2,7 +2,7 @@ module HeaderHelper
   def destroy
     return if request.path['stand_ups'] || request.path['code_reviews']
     if request.path['edit']
-      delete_button @student || @semester || @course || @user || @project
+      delete_button @lesson || @student || @semester || @course || @user || @project
     else
       logout_button
     end
@@ -14,6 +14,7 @@ module HeaderHelper
     when Semester then course_semester_path resource.course_id, resource
     when User then user_path resource
     when Project then project_path resource
+    when Lesson then [@course, @semester, resource]
     else course_path resource
     end
 

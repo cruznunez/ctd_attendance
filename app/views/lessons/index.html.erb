@@ -1,35 +1,22 @@
-<h1>Lessons</h1>
+<h3 class="card-title">
+  <%= @course.name %> | <%= @semester.name %> | Lessons
+</h3>
 
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Date</th>
-      <th>Visible</th>
-      <th>Notes</th>
-      <th>Homework</th>
-      <th>Slides</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<% @lessons.each do |lesson| %>
+  <p class="card flex justify-between <%= lesson.visible ? nil : 'dark' %>">
+    <%= link_to [@course, @semester, lesson] do %>
+      <% if current_user %>
+        <% if lesson.visible %>
+          <i class="fa fa-eye mr" aria-hidden="true"></i>
+        <% else %>
+          <i class="fa fa-eye-slash mr" aria-hidden="true"></i>
+        <% end %>
+      <% end %>
 
-  <tbody>
-    <% @lessons.each do |lesson| %>
-      <tr>
-        <td><%= lesson.title %></td>
-        <td><%= lesson.date %></td>
-        <td><%= lesson.visible %></td>
-        <td><%= lesson.notes %></td>
-        <td><%= lesson.homework %></td>
-        <td><%= lesson.slides %></td>
-        <td><%= link_to 'Show', lesson %></td>
-        <td><%= link_to 'Edit', edit_lesson_path(lesson) %></td>
-        <td><%= link_to 'Destroy', lesson, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+      <%= just_date lesson.date %> - <%= lesson.title %>
     <% end %>
-  </tbody>
-</table>
+    <%= link_to 'Slides', [:slides, @course, @semester, lesson], target: '_blank' %>
+  </p>
+<% end %>
 
-<br>
-
-<%= link_to 'New Lesson', [:new, @course, @semester, :lesson] %>
+<%= add_button [:new, @course, @semester, :lesson] if policy(:lesson).teacher? %>

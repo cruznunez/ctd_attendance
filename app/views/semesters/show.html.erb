@@ -1,11 +1,6 @@
 <h3 class="card-title"><%= @course.name %> | <%= @semester.name %></h3>
 
-
-<% if current_student %>
-  <p>Presentations (show all)</p>
-
-  <p>Assignments (show all)</p>
-<% elsif current_user %>
+<% if current_user %>
   <p class="card-title">
     Staff
   </p>
@@ -38,10 +33,11 @@
     <%= @semester.active ? 'Active' : 'Inactive' %>
   </p>
 
-
-  <%= link_to attendance_course_semester_path(@course, @semester), class: 'clickable-row flex justify-between' do %>
-    Take Attendance
-    <i class="fa fa-arrow-right fa-lg" aria-hidden="true" style="line-height: 1;"></i>
+  <% if @semester.active %>
+    <%= link_to attendance_course_semester_path(@course, @semester), class: 'clickable-row flex justify-between' do %>
+      Take Attendance
+      <i class="fa fa-arrow-right fa-lg" aria-hidden="true" style="line-height: 1;"></i>
+    <% end %>
   <% end %>
 
   <div class="flex justify-between card-title">

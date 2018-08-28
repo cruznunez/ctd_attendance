@@ -1,3 +1,13 @@
+<% if current_user %>
+  <p class="card-title">
+    Visible
+  </p>
+
+  <p class="card">
+    <%= @lesson.visible %>
+  </p>
+<% end %>
+
 <p class="card-title">
   Title
 </p>
@@ -15,22 +25,6 @@
 </p>
 
 <p class="card-title">
-  Visible
-</p>
-
-<p class="card">
-  <%= @lesson.visible %>
-</p>
-
-<p class="card-title">
-  Notes
-</p>
-
-<p class="card">
-  <%= @lesson.notes %>
-</p>
-
-<p class="card-title">
   Homework
 </p>
 
@@ -42,9 +36,30 @@
   Slides
 </p>
 
-<p class="card">
-  <%= @lesson.slides %>
+<%= link_to [:slides, @course, @semester, @lesson], class: 'clickable-row flex justify-between', target: '_blank' do %>
+  View Slides
+  <i class="fa fa-arrow-right fa-lg" aria-hidden="true" style="line-height: 1;"></i>
+<% end %>
+
+<details>
+  <summary class="card-title mb">Parsed</summary>
+
+  <div class="card">
+    <%= full_md @lesson.slides %>
+  </div>
+</details>
+
+<p class="card-title">
+  Notes
 </p>
 
-<%= edit_button [:edit, @course, @semester, @lesson] %>
+<details>
+  <summary class="card-title mb">Parsed</summary>
+
+  <div class="card">
+    <%= full_md @lesson.notes %>
+  </div>
+</details>
+
+<%= edit_button [:edit, @course, @semester, @lesson] if policy(:lesson).teacher? %>
 <%= back_button [@course, @semester, :lessons] %>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+	<head>
+    <title>CTD Attendance</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<link rel="stylesheet" href="/reveal/reveal.css">
+		<link rel="stylesheet" href="/reveal/themes/simple.css">
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+        <%= @lesson.slides.html_safe %>
+			</div>
+		</div>
+		<script src="/reveal/reveal.js"></script>
+		<script>
+      // More info https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+        transition: 'concave' // none/fade/slide/convex/concave/zoom
+      });
+		</script>
+	</body>
+</html>

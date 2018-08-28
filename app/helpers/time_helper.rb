@@ -6,6 +6,10 @@ module TimeHelper
 
   def just_date(date)
     return '<i>missing</i>'.html_safe unless date.respond_to?(:strftime)
-    date.strftime('%-m/%-d/%Y')
+    if date.year == Date.today.year
+      date.strftime('%-m/%-d')
+    else
+      date.strftime('%-m/%-d/%Y')
+    end
   end
 end

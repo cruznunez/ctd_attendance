@@ -1,5 +1,9 @@
 <div class="flex flex-column">
   <% @semesters.each do |semester| %>
-    <%= link_to semester.name, course_semester_path(semester.course_id, semester), class: 'clickable-row' %>
+    <% if current_user %>
+      <%= link_to semester.name, [@course, semester], class: 'clickable-row' %>
+    <% elsif current_student %>
+      <%= link_to semester.name, [@course, semester, :lessons], class: 'clickable-row' %>
+    <% end %>
   <% end %>
 </div>
