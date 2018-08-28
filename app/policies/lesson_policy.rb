@@ -11,7 +11,19 @@ class LessonPolicy < ApplicationPolicy
     student? || teacher?
   end
 
-  %i(index? show? slides?).each do |ali|
+  def visible?
+    @record.is_a?(Lesson) && @record.visible?
+  end
+
+  def visible_to_person?
+    (student? && visible?) || teacher?
+  end
+
+  %i(show?).each do |ali|
+    alias_method ali, :visible_to_person?
+  end
+
+  %i(index? slides?).each do |ali|
     alias_method ali, :student_or_teacher?
   end
 

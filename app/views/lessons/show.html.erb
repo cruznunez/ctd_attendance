@@ -1,3 +1,9 @@
+<h3 class="card-title">
+  <%= @course.name %> |
+  <%= @semester.name %> |
+  <%= @lesson.title %>
+</h3>
+
 <% if current_user %>
   <p class="card-title">
     Visible
@@ -7,14 +13,6 @@
     <%= @lesson.visible %>
   </p>
 <% end %>
-
-<p class="card-title">
-  Title
-</p>
-
-<p class="card">
-  <%= @lesson.title %>
-</p>
 
 <p class="card-title">
   Date
@@ -35,6 +33,20 @@
 <p class="card-title">
   Slides
 </p>
+
+<% if current_user %>
+  <div class="card mb">
+    <div class="flex justify-between">
+      Theme
+      <span><%= @lesson.theme %></span>
+    </div>
+
+    <div class="flex justify-between">
+      Transition
+      <span><%= @lesson.transition %></span>
+    </div>
+  </div>
+<% end %>
 
 <%= link_to [:slides, @course, @semester, @lesson], class: 'clickable-row flex justify-between', target: '_blank' do %>
   View Slides

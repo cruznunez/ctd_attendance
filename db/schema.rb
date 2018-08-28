@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180821185728) do
+ActiveRecord::Schema.define(version: 20180827154326) do
 
   create_table "attendances", force: :cascade do |t|
     t.integer "semester_id"
@@ -51,6 +51,22 @@ ActiveRecord::Schema.define(version: 20180821185728) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.index ["priority", "run_at"], name: "delayed_jobs_priority"
+  end
+
+  create_table "lessons", force: :cascade do |t|
+    t.integer  "semester_id"
+    t.date     "date"
+    t.string   "title"
+    t.boolean  "visible"
+    t.text     "notes"
+    t.text     "homework"
+    t.text     "slides"
+    t.string   "video"
+    t.string   "theme",       default: "simple"
+    t.string   "transition",  default: "none"
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.index ["semester_id"], name: "index_lessons_on_semester_id"
   end
 
   create_table "projects", force: :cascade do |t|

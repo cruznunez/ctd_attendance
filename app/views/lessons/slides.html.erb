@@ -5,12 +5,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 		<link rel="stylesheet" href="/reveal/reveal.css">
-		<link rel="stylesheet" href="/reveal/themes/simple.css">
+		<link rel="stylesheet" href="/reveal/themes/<%= @lesson.theme %>.css">
 	</head>
 	<body>
 		<div class="reveal">
 			<div class="slides">
-        <%= @lesson.slides.html_safe %>
+        <%= @lesson.slides&.html_safe %>
 			</div>
 		</div>
 		<script src="/reveal/reveal.js"></script>
@@ -21,7 +21,7 @@
         progress: true,
         history: true,
         center: true,
-        transition: 'concave' // none/fade/slide/convex/concave/zoom
+        transition: '<%= @lesson.transition %>' // none/fade/slide/convex/concave/zoom
       });
 		</script>
 	</body>

@@ -78,9 +78,41 @@ RSpec.describe LessonPolicy do
   end
 
   permissions :show? do
+    before do
+      create :course
+      create :semester
+      @lesson = create :lesson
+    end
+
     context 'student' do
-      it 'grants access' do
-        policy.should permit @student
+      context 'lesson is visible' do
+        before do
+          @lesson.update visible: true
+        end
+
+        it 'grants access' do
+          policy.should permit @student, @lesson
+        end
+      end
+
+      context 'lesson is not visible' do
+        before do
+          @lesson.update visible: false
+        end
+
+        it 'denies access' do
+          policy.should_not permit @student, @lesson
+        end
+      end
+
+      context 'lesson is not provided' do
+        before do
+          @lesson.update visible: true
+        end
+
+        it 'denies access' do
+          policy.should_not permit @student
+        end
       end
     end
 

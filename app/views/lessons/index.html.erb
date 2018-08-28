@@ -15,7 +15,15 @@
 
       <%= just_date lesson.date %> - <%= lesson.title %>
     <% end %>
-    <%= link_to 'Slides', [:slides, @course, @semester, lesson], target: '_blank' %>
+    <span>
+      <% if lesson.video %>
+        <%= link_to lesson.video do %>
+          <i class="fa fa-youtube-play mr" aria-hidden="true"></i>
+        <% end %>
+      <% end %>
+
+      <%= link_to 'Slides', [:slides, @course, @semester, lesson], target: '_blank' if lesson.slides.present? %>
+    </span>
   </p>
 <% end %>
 

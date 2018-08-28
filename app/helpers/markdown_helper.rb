@@ -1,6 +1,8 @@
 # includes markdown support
 module MarkdownHelper
   def full_md(text)
+    return unless text.present?
+
     markdown = Redcarpet::Markdown.new(
       Redcarpet::Render::HTML,
       autolink: true, disable_indented_code_blocks: true, highlight: true,

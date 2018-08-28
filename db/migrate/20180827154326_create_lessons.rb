@@ -9,7 +9,9 @@ class CreateLessons < ActiveRecord::Migration[5.0]
       t.text :notes
       t.text :homework
       t.text :slides
-      t.string :video_url
+      t.string :video
+      t.string :theme, default: 'simple'
+      t.string :transition, default: 'none'
 
       t.timestamps
     end

@@ -1,7 +1,8 @@
 class LessonsController < ApplicationController
-  before_action :authenticate_person!, :authorize_person!
+  before_action :authenticate_person!
   before_action :set_references
   before_action :set_lesson, only: [:show, :edit, :update, :destroy, :slides]
+  before_action :authorize_person!
   after_action :verify_authorized
 
   # GET /lessons
@@ -61,7 +62,7 @@ class LessonsController < ApplicationController
   private
 
   def authorize_person!
-    authorize Lesson
+    authorize @lesson || Lesson
   end
 
   def pundit_user
@@ -81,7 +82,7 @@ class LessonsController < ApplicationController
   # Never trust parameters from the scary internet, only allow the white list through.
   def lesson_params
     params.require(:lesson).permit(
-      :title, :date, :visible, :notes, :homework, :slides
+      :title, :date, :visible, :notes, :homework, :slides, :video, :theme, :transition
     )
   end
 end

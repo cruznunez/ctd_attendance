@@ -7,15 +7,24 @@
   <div class="card field">
     <div>
       <span>
-        <%= f.text_field :title %>
+        <%= f.text_field :title, autocomplete: :off, required: true, size: 30 %>
         <%= f.label :title %>
       </span>
     </div>
 
-    <span>
-      <%= f.date_select :date %>
-      <%= f.label :date %>
-    </span>
+    <div>
+      <span>
+        <%= f.date_select :date %>
+        <%= f.label :date %>
+      </span>
+    </div>
+
+    <div>
+      <span>
+        <%= f.text_field :video, autocomplete: :off %>
+        <%= f.label :video %>
+      </span>
+    </div>
 
     <div class="mb">
       <span class="wide">
@@ -34,6 +43,27 @@
         <div class="resize-handle"></div>
 
         <%= f.label :homework %>
+      </span>
+    </div>
+
+  </div>
+
+  <p class="card-title">
+    Slides
+  </p>
+
+  <div class="card field">
+    <div>
+      <span>
+        <%= f.select :theme, %w(beige black blood league moon night serif simple sky solarized white) %>
+        <%= f.label :theme %>
+      </span>
+    </div>
+
+    <div>
+      <span>
+        <%= f.select :transition, %w(none fade slide convex concave zoom) %>
+        <%= f.label :transition %>
       </span>
     </div>
 
