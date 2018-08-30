@@ -17,12 +17,12 @@
     <% end %>
     <span>
       <% if lesson.video %>
-        <%= link_to lesson.video do %>
-          <i class="fa fa-youtube-play mr" aria-hidden="true"></i>
+        <%= link_to lesson.video, target: '_blank' do %>
+          <i class="fa fa-youtube-play" aria-hidden="true"></i>
         <% end %>
       <% end %>
 
-      <%= link_to 'Slides', [:slides, @course, @semester, lesson], target: '_blank' if lesson.slides.present? %>
+      <%= link_to 'Slides', [:slides, @course, @semester, lesson], class: 'ml', target: '_blank' if lesson.slides.present? %>
     </span>
   </p>
 <% end %>
@@ -30,7 +30,7 @@
 <% if current_user %>
   <%= back_button [@course, @semester] %>
 <% else %>
-  <%= back_button [@course, :semesters] %>
+  <%= back_button courses_path %>
 <% end %>
 
 <%= add_button [:new, @course, @semester, :lesson] if policy(:lesson).teacher? %>

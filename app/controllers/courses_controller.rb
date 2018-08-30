@@ -6,8 +6,7 @@ class CoursesController < ApplicationController
   # GET /courses
   def index
     if current_student
-      ids = current_student.semesters.pluck :course_id
-      @courses = Course.where id: ids
+      @semesters = current_student.semesters
     elsif current_user
       @courses = Course.all
     end

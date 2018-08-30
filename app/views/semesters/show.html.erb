@@ -19,16 +19,18 @@
       <%= @semester.director&.email || '<i>none</i>'.html_safe %>
     </div>
   </div>
+<% end %>
 
-  <p class="card-title">
-    Lessons
-  </p>
+<p class="card-title">
+  Lessons
+</p>
 
-  <%= link_to [@course, @semester, :lessons], class: 'clickable-row flex justify-between' do %>
-    View Lessons
-    <i class="fa fa-arrow-right fa-lg" aria-hidden="true" style="line-height: 1;"></i>
-  <% end %>
+<%= link_to [@course, @semester, :lessons], class: 'clickable-row flex justify-between' do %>
+  View Lessons
+  <i class="fa fa-arrow-right fa-lg" aria-hidden="true" style="line-height: 1;"></i>
+<% end %>
 
+<% if current_user %>
   <p class="card-title">
     <%= @semester.active ? 'Active' : 'Inactive' %>
   </p>
@@ -53,6 +55,11 @@
   </div>
 <% end %>
 
-<%= back_button course_semesters_path @course %>
+<%# users would want to go back to semesters#index but students would most likely want to go back to courses#index %>
+<% if current_user %>
+  <%= back_button course_semesters_path @course %>
+<% elsif current_student %>
+  <%= back_button courses_path %>
+<% end %>
 
-<%= edit_button edit_course_semester_path @course, @semester %>
+<%= edit_button edit_course_semester_path @course, @semester if policy(:semester).teacher? %>

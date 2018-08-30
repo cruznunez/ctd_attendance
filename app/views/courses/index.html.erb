@@ -1,8 +1,24 @@
-<h2 class="card-title">Courses</h2>
+<% if current_user %>
+  <h2 class="card-title">Courses</h2>
+<% else %>
+  <h2 class="card-title">Classes</h2>
+<% end %>
 
-<%#= render 'table' %>
-
-<%= render 'rows' %>
+<div class="flex flex-column">
+  <%# taking the user from courses#index to semesters#index makes showing and editing the course difficult to access. Then again, showing a course is kinda useless. Course only has 1 attribute.  %>
+  <% if current_user %>
+    <% @courses.each do |course| %>
+      <%= link_to course.name, course_semesters_path(course), class: 'clickable-row' %>
+    <% end %>
+  <% elsif current_student %>
+    <% @semesters.each do |semester| %>
+      <% course = semester.course %>
+      <%= link_to [course, semester, :lessons], class: 'clickable-row' do %>
+        <%= course.name %> - <%= semester.name %>
+      <% end %>
+    <% end %>
+  <% end %>
+</div>
 
 <%= back_button root_path %>
 

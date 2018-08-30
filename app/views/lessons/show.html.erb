@@ -1,7 +1,5 @@
 <h3 class="card-title">
-  <%= @course.name %> |
-  <%= @semester.name %> |
-  <%= @lesson.title %>
+  <%= @course.name %> | <%= @semester.name %> | <%= @lesson.title %>
 </h3>
 
 <% if current_user %>
@@ -29,6 +27,17 @@
 <p class="card">
   <%= @lesson.homework || '<i>missing</i>'.html_safe %>
 </p>
+
+<% if @lesson.video.present? %>
+  <p class="card-title">
+    Video
+  </p>
+
+  <%= link_to @lesson.video, class: 'clickable-row flex justify-between', target: '_blank' do %>
+    <%= @lesson.video %>
+    <i class="fa fa-arrow-right fa-lg" aria-hidden="true" style="line-height: 1;"></i>
+  <% end %>
+<% end %>
 
 <p class="card-title">
   Slides
