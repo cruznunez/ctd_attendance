@@ -1,6 +1,9 @@
 <h2 class="card-title"><%= @student.name %></h2>
 
-<%= image_tag @student.image, id: 'profile-img' %>
+<% unless @student.image.url == '/plus.png' %>
+  <%= image_tag @student.image, id: 'profile-img' %>
+<% end %>
+
 <% if false %>
   <details>
     <summary class="card-title mb">Tracking info</summary>

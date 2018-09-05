@@ -1,10 +1,10 @@
-<h2>
+<h2 class="card-title">
   <% if resource.is_a? Student %>
     Student
   <% elsif resource.is_a? User %>
     Teacher
   <% end %>
-  Log in
+  Log In
 </h2>
 
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
