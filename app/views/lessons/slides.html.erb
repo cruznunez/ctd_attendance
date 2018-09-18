@@ -6,8 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 		<link rel="stylesheet" href="/reveal/reveal.css">
 		<link rel="stylesheet" href="/reveal/themes/<%= @lesson.theme %>.css">
+		<%# load highlight plugin %>
+		<script src="/reveal/plugin/highlight.js"></script>
+		<%# load css theme for highlight plugin %>
+		<link rel="stylesheet" href="/reveal/css/zenburn.css">
 	</head>
 	<body>
+		<%# initialize the syntax highlighting %>
+		<script>hljs.initHighlightingOnLoad();</script>
+
 		<div class="reveal">
 			<div class="slides">
         <%= @lesson.slides&.html_safe %>
