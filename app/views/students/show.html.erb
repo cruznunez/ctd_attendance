@@ -52,7 +52,7 @@
 
 <%= student_info @student, :email %>
 
-<% if current_user && current_user.teacher? && false %>
+<% if current_user && current_user.teacher? %>
   <details>
     <summary class="card-title mb">Email Confirmation</summary>
 
