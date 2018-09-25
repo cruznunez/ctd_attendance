@@ -24,11 +24,19 @@ module HeaderHelper
     link_to btn, path, method: :delete, data: { confirm: msg }
   end
 
+  def login_button
+    link_to new_student_session_path do
+      <<-HTML.html_safe
+        <i class="fa fa-sign-in fa-lg" aria-hidden="true"></i>
+      HTML
+    end
+  end
+
   def logout_button
     if user_signed_in?
       link_to destroy_user_session_path, method: :delete do
         <<-HTML.html_safe
-          <i class="fa fa-power-off fa-lg" aria-hidden="true"></i>
+          <i class="fa fa-sign-out fa-flip-horizontal fa-lg" aria-hidden="true"></i>
         HTML
       end
     elsif student_signed_in?

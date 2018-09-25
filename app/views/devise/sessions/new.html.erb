@@ -32,10 +32,13 @@
       </div>
     <% end -%>
 
+    <div class="mt mb">
+      <%= f.submit 'Log in', style: 'border: 1px solid currentColor; font: inherit;' %>
+    </div>
+
     <%= render "devise/shared/links" %>
   </div>
 
-  <%= f.submit style: 'display: none;' %>
 
   <%= submit_button f %>
 <% end %>
