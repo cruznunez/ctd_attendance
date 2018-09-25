@@ -42,7 +42,7 @@ module HeaderHelper
     elsif student_signed_in?
       link_to destroy_student_session_path, method: :delete do
         <<-HTML.html_safe
-        <i class="fa fa-power-off fa-lg" aria-hidden="true"></i>
+        <i class="fa fa-sign-out fa-flip-horizontal fa-lg" aria-hidden="true"></i>
         HTML
       end
     end

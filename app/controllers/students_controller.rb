@@ -65,6 +65,7 @@ class StudentsController < ApplicationController
         bypass_sign_in @student # sign in again
         redirect_to root_path, notice: 'Password changed'
       else
+        alert_errors @student
         p 'sub 2'
         render :edit
       end
@@ -72,6 +73,7 @@ class StudentsController < ApplicationController
       if @student.update student_params
         redirect_to @student, notice: 'Student updated'
       else
+        alert_errors @student
         render :edit
       end
     end
