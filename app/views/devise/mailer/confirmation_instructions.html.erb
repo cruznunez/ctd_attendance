@@ -1,5 +1,36 @@
 <p>Welcome <%= @email %>!</p>
 
-<p>You can confirm your account email through the link below:</p>
+<p>
+  You are invited to join Code The Dream's student network! An account has already been made for you, but you must confirm your email and set a password. You can confirm your account email through the link below:
+</p>
 
-<p><%= link_to 'Confirm my account', confirmation_url(@resource, confirmation_token: @token) %></p>
+<p>
+  <%= link_to 'Confirm my account', confirmation_url(@resource, confirmation_token: @token) %>
+</p>
+
+<p>
+  With a Code The Dream student account, you can access class material like:
+</p>
+
+<ul>
+  <li>Slides</li>
+  <li>Notes</li>
+  <li>Videos</li>
+  <li>Homework</li>
+</ul>
+
+<p>
+  We hope to see you soon!
+</p>
+
+<p>
+  Love always,
+</p>
+
+<p>
+  Code the Dream
+</p>
+
+<p>
+  P.S. Don't reply to this email lol we won't see it
+</p>
