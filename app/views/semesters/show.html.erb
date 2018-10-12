@@ -43,14 +43,47 @@
   <% end %>
 
   <div class="flex justify-between card-title">
-    <p><%= pluralize @semester.students.size, 'student' %></p>
+    <p>
+      <% student_count = pluralize @semester.students.size, 'student' %>
 
-    <p>Attendance</p>
+      <% if params[:sort] == 'name' %>
+        <% if params[:dir] == 'asc' %>
+          <%= link_to student_count, course_semester_path(@course, @semester, sort: 'name', dir: 'desc'), class: 'asc' %>
+        <% elsif params[:dir] == 'desc' %>
+          <%= link_to student_count, course_semester_path(@course, @semester, sort: 'name', dir: 'asc'), class: 'desc' %>
+        <% end %>
+      <% elsif params[:sort].nil? %>
+        <%= link_to student_count, course_semester_path(@course, @semester, sort: 'name', dir: 'desc'), class: 'asc' %>
+      <% else %>
+        <%= link_to student_count, course_semester_path(@course, @semester, sort: 'name', dir: 'asc') %>
+      <% end %>
+    </p>
+
+    <p>
+      <% if params[:sort] == 'attendance' %>
+        <% if params[:dir] == 'desc' %>
+          <%= link_to 'Attendance', course_semester_path(@course, @semester, sort: 'attendance', dir: 'asc'), class: 'desc' %>
+        <% elsif params[:dir] == 'asc' %>
+          <%= link_to 'Attendance', course_semester_path(@course, @semester, sort: 'attendance', dir: 'desc'), class: 'asc' %>
+        <% end %>
+      <% else %>
+        <%= link_to 'Attendance', course_semester_path(@course, @semester, sort: 'attendance', dir: 'desc') %>
+      <% end %>
+    </p>
   </div>
 
   <div class="flex flex-column">
-    <% @semester.students.each do |student| %>
-      <%= student_attendance student, @semester.attendances %>
+    <% students = @semester.students %>
+    <% if params[:sort] == 'attendance' %>
+      <% students = students.sort_by do |student|
+        total = student.attendances.select { |x| x.semester_id == @semester.id }
+        attendance_percentage total
+      end %>
+      <% students.reverse! if params[:dir] == 'desc' %>
+    <% end %>
+
+    <% students.each do |student| %>
+      <%= student_attendance student, @semester %>
     <% end %>
   </div>
 <% end %>

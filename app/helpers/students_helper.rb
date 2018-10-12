@@ -1,4 +1,9 @@
 module StudentsHelper
+  def attendance_percentage(total)
+    present = total.select &:present
+    percent = (present.size/total.size.to_f * 100).round rescue 0
+  end
+
   def semester_attendance(semester, attendances)
     present = attendances.select &:present
     percent = (present.size/attendances.size.to_f * 100).round rescue 0
@@ -10,22 +15,9 @@ module StudentsHelper
     end
   end
 
-  # def student_attendance(student)
-  #   total = student.attendances.select { |x| x.semester_id == @semester.id }
-  #   present = total.select &:present
-  #   percent = (present.size/total.size.to_f * 100).round rescue 0
-  #   link_to student, class: 'attendance', style: "width: #{percent}%" do
-  #     <<-HTML.html_safe
-  #       <span>#{student.first_name}</span>
-  #       <span>#{percent}%</span>
-  #     HTML
-  #   end
-  # end
-
-  def student_attendance(student, attendances)
-    total = attendances.select { |x| x.student_id == student.id }
-    present = total.select &:present
-    percent = (present.size/total.size.to_f * 100).round rescue 0
+  def student_attendance(student, semester)
+    total = student.attendances.select { |x| x.semester_id == semester.id }
+    percent = attendance_percentage total
     link_to student, class: 'attendance', style: "width: #{percent}%" do
       <<~HTML.html_safe
         #{student.first_name}

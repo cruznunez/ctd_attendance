@@ -23,3 +23,15 @@ a {
     background: #F2F2F2; // #F9F9F9;
   }
 }
+
+// Sortable column arrows
+.asc:after, .desc:after {
+  font-family: FontAwesome;
+  margin-left: .1em;
+}
+.asc:after {
+  content: "\f106";
+}
+.desc:after {
+  content: "\f107";
+}

@@ -21,9 +21,15 @@ class SemestersController < ApplicationController
   # end
 
   def show
-    @semester = Semester.includes(:students, :attendances)
-                        .order('students.first_name')
-                        .find params[:id]
+    @semester = Semester.includes(students: :attendances)
+
+    if params[:sort] == 'name' && params[:dir] == 'desc'
+      @semester = @semester.order 'students.first_name DESC'
+    else
+      @semester = @semester.order 'students.first_name ASC'
+    end
+
+    @semester = @semester.find params[:id]
   end
 
   # GET /semesters/new
