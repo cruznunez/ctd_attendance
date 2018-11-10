@@ -6,20 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 		<link rel="stylesheet" href="/reveal/reveal.css">
 		<link rel="stylesheet" href="/reveal/themes/<%= @lesson.theme %>.css">
-		<%# load highlight plugin %>
-		<script src="/reveal/plugin/highlight.js"></script>
 		<%# load css theme for highlight plugin %>
 		<link rel="stylesheet" href="/reveal/css/zenburn.css">
 	</head>
 	<body>
-		<%# initialize the syntax highlighting %>
-		<script>hljs.initHighlightingOnLoad();</script>
-
 		<div class="reveal">
 			<div class="slides">
         <%= @lesson.slides&.html_safe %>
 			</div>
 		</div>
+		<script src="/reveal/head.min.js"></script>
 		<script src="/reveal/reveal.js"></script>
 		<script>
       // More info https://github.com/hakimel/reveal.js#configuration
@@ -28,7 +24,10 @@
         progress: true,
         history: true,
         center: true,
-        transition: '<%= @lesson.transition %>' // none/fade/slide/convex/concave/zoom
+        transition: '<%= @lesson.transition %>', // none/fade/slide/convex/concave/zoom
+				dependencies: [
+					{ src: '/reveal/plugin/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+				]
       });
 		</script>
 	</body>
