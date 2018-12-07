@@ -20,7 +20,8 @@ a {
   padding: 1em;
 
   &:hover {
-    background: #F2F2F2; // #F9F9F9;
+    box-shadow: 0 3px 4px rgba(0, 0, 0, 0.2);
+    // background: #F9F9F9; // #F2F2F2;
   }
 }
 
