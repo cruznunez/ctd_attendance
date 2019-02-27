@@ -19,6 +19,10 @@ class LessonPolicy < ApplicationPolicy
     (student? && visible?) || teacher?
   end
 
+  def slides_name?
+    true
+  end
+
   %i(show?).each do |ali|
     alias_method ali, :visible_to_person?
   end

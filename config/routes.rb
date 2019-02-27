@@ -56,4 +56,6 @@ Rails.application.routes.draw do
   end
 
   resources :users
+
+  get '/:slides_name' => 'lessons#slides_name'
 end

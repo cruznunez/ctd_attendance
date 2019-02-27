@@ -55,6 +55,13 @@
   <div class="card field">
     <div>
       <span>
+        <%= f.text_field :slides_name, autocomplete: :off %>
+        <%= f.label :slides_name %>
+      </span>
+    </div>
+
+    <div>
+      <span>
         <%= f.select :theme, %w(beige black blood league moon night serif simple sky solarized white) %>
         <%= f.label :theme %>
       </span>

@@ -46,6 +46,11 @@
 <% if current_user %>
   <div class="card mb">
     <div class="flex justify-between">
+      Slides name
+      <span><%= @lesson.slides_name %></span>
+    </div>
+
+    <div class="flex justify-between">
       Theme
       <span><%= @lesson.theme %></span>
     </div>

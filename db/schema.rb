@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180827154326) do
+ActiveRecord::Schema.define(version: 20190227035135) do
 
   create_table "attendances", force: :cascade do |t|
     t.integer "semester_id"
@@ -66,7 +66,9 @@ ActiveRecord::Schema.define(version: 20180827154326) do
     t.string   "transition",  default: "none"
     t.datetime "created_at",                     null: false
     t.datetime "updated_at",                     null: false
+    t.string   "slides_name"
     t.index ["semester_id"], name: "index_lessons_on_semester_id"
+    t.index ["slides_name"], name: "index_lessons_on_slides_name"
   end
 
   create_table "projects", force: :cascade do |t|

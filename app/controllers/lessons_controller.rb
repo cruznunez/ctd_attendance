@@ -1,6 +1,6 @@
 class LessonsController < ApplicationController
-  before_action :authenticate_person!
-  before_action :set_references
+  before_action :authenticate_person!, except: :slides_name
+  before_action :set_references, except: :slides_name
   before_action :set_lesson, only: [:show, :edit, :update, :destroy, :slides]
   before_action :authorize_person!
   after_action :verify_authorized
@@ -59,6 +59,11 @@ class LessonsController < ApplicationController
     render layout: false
   end
 
+  def slides_name
+    @lesson = Lesson.find_by_slides_name params[:slides_name]
+    render :slides, layout: false
+  end
+
   private
 
   def authorize_person!
@@ -82,7 +87,7 @@ class LessonsController < ApplicationController
   # Never trust parameters from the scary internet, only allow the white list through.
   def lesson_params
     params.require(:lesson).permit(
-      :title, :date, :visible, :notes, :homework, :slides, :video, :theme, :transition
+      :title, :date, :visible, :notes, :homework, :slides, :slides_name, :video, :theme, :transition
     )
   end
 end
