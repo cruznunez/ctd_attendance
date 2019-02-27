@@ -21,7 +21,7 @@ gem 'jbuilder', '~> 2.5' # for autocomplete API
 gem 'jquery-rails'
 gem 'jquery-ui-rails' # for autocomplete
 gem 'nilify_blanks' # save empty values as nil in db
-gem 'paperclip', '~> 5.0.0' # image processor
+gem 'paperclip', '~> 5.2.0' # image processor
 gem 'puma', '~> 3.0'
 gem 'pundit'
 gem 'rails', '~> 5.0.1'
